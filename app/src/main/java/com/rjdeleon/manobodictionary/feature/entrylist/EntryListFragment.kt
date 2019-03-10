@@ -19,17 +19,38 @@ import kotlinx.android.synthetic.main.fragment_entry_list.*
  * create an instance of this fragment.
  *
  */
+private const val ARG_LETTER = "ARG_LETTER"
+
 class EntryListFragment : Fragment() {
 
     private lateinit var mViewModel: EntryListViewModel
     private lateinit var mAdapter: EntryListAdapter
+    private var mArgLetter = 'A'
+
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @return A new instance of fragment EntryListFragment.
+         */
+        @JvmStatic
+        fun newInstance(letter: Char) = EntryListFragment().apply {
+            arguments = Bundle().apply {
+                putChar(ARG_LETTER, letter)
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.let {
+            mArgLetter = it.getChar(ARG_LETTER)
+        }
 
         /* Get viewModel */
         mViewModel = ViewModelProviders
-            .of(this, EntryListViewModelFactory(activity!!.application, 'A'))
+            .of(this, EntryListViewModelFactory(activity!!.application, mArgLetter))
             .get(EntryListViewModel::class.java)
 
         /* Get adapter for entry list */
@@ -48,17 +69,5 @@ class EntryListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         entryListRecyclerView.adapter = mAdapter
         mViewModel.getEntries().observe(this, Observer(mAdapter::setEntries))
-    }
-
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment EntryListFragment.
-         */
-        @JvmStatic
-        fun newInstance() = EntryListFragment()
     }
 }

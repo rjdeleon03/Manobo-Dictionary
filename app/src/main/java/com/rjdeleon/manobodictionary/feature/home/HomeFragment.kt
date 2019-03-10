@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
 
         var c = 'A'
         while (c <= 'Z') {
-            adapter.addFragment(EntryListFragment.newInstance(), c.toString())
+            adapter.addFragment(EntryListFragment.newInstance(c), c.toString())
             ++c
         }
         vp.adapter = adapter
