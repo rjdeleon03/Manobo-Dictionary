@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import com.rjdeleon.manobodictionary.data.entities.Entry
 
+@Suppress("SpellCheckingInspection")
 @Dao
 interface EntryDao {
 
@@ -16,8 +17,8 @@ interface EntryDao {
     fun getCount(): Int
 
 
-    @Query("SELECT * FROM entry WHERE word LIKE :letterFilter")
-    fun getByLetter(letterFilter: String)
+    @Query("SELECT * FROM entry WHERE word LIKE :letterFilter COLLATE NOCASE")
+    fun getByLetter(letterFilter: String): LiveData<List<Entry>>
 
     @Insert
     fun insert(entry: Entry)

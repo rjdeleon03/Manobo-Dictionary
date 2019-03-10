@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 
 import com.rjdeleon.manobodictionary.R
+import com.rjdeleon.manobodictionary.data.entities.Entry
 
 /**
  * A simple [Fragment] subclass.
@@ -16,6 +19,17 @@ import com.rjdeleon.manobodictionary.R
  *
  */
 class EntryListFragment : Fragment() {
+
+    private lateinit var mViewModel: EntryListViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        /* Get viewModel */
+        mViewModel = ViewModelProviders
+            .of(this, EntryListViewModelFactory(activity!!.application, 'A'))
+            .get(EntryListViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
