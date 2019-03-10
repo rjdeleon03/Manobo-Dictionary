@@ -17,8 +17,9 @@ interface EntryDao {
     fun getCount(): Int
 
 
-    @Query("SELECT * FROM entry WHERE word LIKE :letterFilter COLLATE NOCASE")
-    fun getByLetter(letterFilter: String): LiveData<List<Entry>>
+    @Query("SELECT * FROM entry WHERE word LIKE :letterFilter OR word LIKE :letterFilter2 COLLATE NOCASE")
+    fun getByLetter(letterFilter: String,
+                    letterFilter2: String): LiveData<List<Entry>>
 
     @Insert
     fun insert(entry: Entry)

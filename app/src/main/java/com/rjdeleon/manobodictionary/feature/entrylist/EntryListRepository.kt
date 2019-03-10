@@ -8,7 +8,7 @@ class EntryListRepository(application: Application,
                           letter: Char): AndroidViewModel(application) {
 
     private val mDatabase = DictionaryDatabase.getDatabase(application.applicationContext)
-    private val mEntries = mDatabase.entryDao().getByLetter("$letter%")
+    private val mEntries = mDatabase.entryDao().getByLetter("$letter%", "'$letter%")
 
     fun getEntries() = mEntries
 }
