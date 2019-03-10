@@ -9,8 +9,11 @@ import com.rjdeleon.manobodictionary.data.entities.Entry
 @Dao
 interface EntryDao {
 
-    @Query("SELECT * from entry ORDER BY word")
+    @Query("SELECT * FROM entry ORDER BY word")
     fun getAllEntries(): LiveData<List<Entry>>
+
+    @Query("SELECT count(*) FROM entry")
+    fun getCount(): Int
 
     @Insert
     fun insert(entry: Entry)

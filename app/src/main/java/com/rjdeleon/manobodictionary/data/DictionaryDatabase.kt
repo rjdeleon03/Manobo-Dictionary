@@ -1,13 +1,17 @@
 package com.rjdeleon.manobodictionary.data
 
 import android.content.Context
-import androidx.room.Dao
+import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.rjdeleon.manobodictionary.data.dao.EntryDao
 import com.rjdeleon.manobodictionary.data.dao.MeaningSetDao
+import com.rjdeleon.manobodictionary.data.entities.Entry
+import com.rjdeleon.manobodictionary.data.entities.MeaningSet
 
-@Dao
+@Database(entities = [Entry::class, MeaningSet::class],
+    version = 1,
+    exportSchema = false)
 abstract class DictionaryDatabase : RoomDatabase() {
 
     abstract fun entryDao(): EntryDao

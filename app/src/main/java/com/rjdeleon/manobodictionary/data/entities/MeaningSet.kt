@@ -1,12 +1,10 @@
 package com.rjdeleon.manobodictionary.data.entities
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
+import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
-import androidx.room.PrimaryKey
 
 @Entity(tableName = "meaning_set",
+    indices = [Index("entry_id")],
     foreignKeys = [ForeignKey(
         entity = Entry::class,
         parentColumns = ["id"],
@@ -19,7 +17,7 @@ data class MeaningSet(@PrimaryKey(autoGenerate = true)
                       val id: Int,
 
                       @ColumnInfo(name = "entry_id")
-                      val entryId: Int,
+                      var entryId: Int,
 
                       @ColumnInfo(name = "part_of_speech")
                       val partOfSpeech: String,

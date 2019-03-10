@@ -4,20 +4,22 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "entry")
-data class Entry (@PrimaryKey(autoGenerate = true)
+data class Entry (@PrimaryKey(autoGenerate = false)
                   @ColumnInfo(name = "id")
-                  val id: Int,
+                  var id: Int = 0,
 
                   @ColumnInfo(name = "word")
-                  val word: String,
-
-                  @Ignore
-                  val meaningSets: List<MeaningSet>,
+                  var word: String = "",
 
                   @ColumnInfo(name = "note")
-                  val note: String,
+                  var note: String = "",
 
                   @ColumnInfo(name = "related_word")
-                  val relatedWord: String)
+                  var relatedWord: String = "",
+
+                  @Ignore
+                  @SerializedName("meaningSet")
+                  var meaningSets: List<MeaningSet>? = null)
