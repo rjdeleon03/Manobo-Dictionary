@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 
 import com.rjdeleon.manobodictionary.R
+import com.rjdeleon.manobodictionary.feature.entrylist.EntryListFragment
+import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * A simple [Fragment] subclass.
@@ -35,5 +38,22 @@ class HomeFragment : Fragment() {
          */
         @JvmStatic
         fun newInstance() = HomeFragment()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupViewPager(homeViewPager)
+        homeTabLayout.setupWithViewPager(homeViewPager)
+    }
+
+    private fun setupViewPager(vp: ViewPager) {
+        val adapter = HomeSectionsAdapter(fragmentManager!!)
+
+        var c = 'A'
+        while (c <= 'Z') {
+            adapter.addFragment(EntryListFragment.newInstance(), c.toString())
+            ++c
+        }
+        vp.adapter = adapter
     }
 }
