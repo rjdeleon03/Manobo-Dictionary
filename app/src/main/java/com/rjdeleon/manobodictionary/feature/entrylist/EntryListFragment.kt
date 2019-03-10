@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 
 import com.rjdeleon.manobodictionary.R
 import com.rjdeleon.manobodictionary.data.entities.Entry
+import kotlinx.android.synthetic.main.fragment_entry_list.*
 
 /**
  * A simple [Fragment] subclass.
@@ -21,6 +22,7 @@ import com.rjdeleon.manobodictionary.data.entities.Entry
 class EntryListFragment : Fragment() {
 
     private lateinit var mViewModel: EntryListViewModel
+    private lateinit var mAdapter: EntryListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +31,9 @@ class EntryListFragment : Fragment() {
         mViewModel = ViewModelProviders
             .of(this, EntryListViewModelFactory(activity!!.application, 'A'))
             .get(EntryListViewModel::class.java)
+
+        /* Get adapter for entry list */
+        mAdapter = EntryListAdapter(context!!)
     }
 
     override fun onCreateView(
@@ -37,6 +42,12 @@ class EntryListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_entry_list, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        entryListRecyclerView.adapter = mAdapter
+        mViewModel.getEntries().observe(this, Observer(mAdapter::setEntries))
     }
 
 
