@@ -10,8 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 
 import com.rjdeleon.manobodictionary.R
-import com.rjdeleon.manobodictionary.data.entities.Entry
 import kotlinx.android.synthetic.main.fragment_entry_list.*
+
+private const val ARG_LETTER = "ARG_LETTER"
 
 /**
  * A simple [Fragment] subclass.
@@ -19,8 +20,6 @@ import kotlinx.android.synthetic.main.fragment_entry_list.*
  * create an instance of this fragment.
  *
  */
-private const val ARG_LETTER = "ARG_LETTER"
-
 class EntryListFragment : Fragment() {
 
     private lateinit var mViewModel: EntryListViewModel
