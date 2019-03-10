@@ -32,8 +32,6 @@ class DictionaryApplication: Application() {
         if(db.entryDao().getCount() > 0) return
 
         val gson = GsonBuilder().create()
-
-        var dictJson: String
         try {
 
             /* Read JSON data from file */
@@ -43,7 +41,7 @@ class DictionaryApplication: Application() {
             val buffer = ByteArray(size)
             inputStream.read(buffer)
             inputStream.close()
-            dictJson = String(buffer, StandardCharsets.UTF_8)
+            val dictJson = String(buffer, StandardCharsets.UTF_8)
 
             val listType = object: TypeToken<ArrayList<Entry>>(){}.type
             val entries = gson.fromJson<ArrayList<Entry>>(dictJson, listType)
@@ -62,9 +60,6 @@ class DictionaryApplication: Application() {
                     }
                 }
             }
-
-            val x = db.entryDao().getCount()
-            val y = 65
 
         } catch (ex: Exception) {
             ex.printStackTrace()
