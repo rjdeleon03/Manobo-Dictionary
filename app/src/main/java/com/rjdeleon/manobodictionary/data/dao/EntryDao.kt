@@ -15,6 +15,10 @@ interface EntryDao {
     @Query("SELECT count(*) FROM entry")
     fun getCount(): Int
 
+
+    @Query("SELECT * FROM entry WHERE word LIKE :letterFilter")
+    fun getByLetter(letterFilter: String)
+
     @Insert
     fun insert(entry: Entry)
 }
