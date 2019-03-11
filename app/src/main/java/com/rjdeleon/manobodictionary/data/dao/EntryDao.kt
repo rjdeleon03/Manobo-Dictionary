@@ -21,6 +21,9 @@ interface EntryDao {
     fun getByLetter(letterFilter: String,
                     letterFilter2: String): LiveData<List<Entry>>
 
+    @Query("SELECT * FROM entry WHERE id = :id")
+    fun getById(id: Int): LiveData<Entry>
+
     @Insert
     fun insert(entry: Entry)
 }
