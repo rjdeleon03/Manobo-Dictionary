@@ -6,6 +6,9 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -28,6 +31,7 @@ ext {
     roomVersion = "2.1.0-alpha04"
     lifecycleVersion = "2.1.0-alpha02"
     coroutineVersion = "1.1.1"
+    navVersion = "2.0.0-rc02"
 }
 
 dependencies {
@@ -53,9 +57,11 @@ dependencies {
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
 
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
     // Gson
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'android.arch.navigation:navigation-fragment:1.0.0-rc02'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.viewpager:viewpager:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'

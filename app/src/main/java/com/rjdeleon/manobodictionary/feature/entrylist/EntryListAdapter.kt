@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.rjdeleon.manobodictionary.R
 import com.rjdeleon.manobodictionary.data.entities.Entry
+import com.rjdeleon.manobodictionary.feature.home.HomeFragmentDirections
 import java.lang.Exception
 
 class EntryListAdapter(context: Context) :
@@ -31,6 +33,11 @@ class EntryListAdapter(context: Context) :
     override fun onBindViewHolder(holder: EntryListViewHolder, position: Int) {
         val entry = mEntries[position]
         holder.entryWordText.text = entry.word
+        holder.setOnClickListener(View.OnClickListener {
+            val action = HomeFragmentDirections
+                .actionHomeFragmentToEntryFragment(entry.id)
+            it.findNavController().navigate(action)
+        })
     }
 
     fun setEntries(entries: List<Entry>) {
@@ -40,6 +47,10 @@ class EntryListAdapter(context: Context) :
 
     class EntryListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val entryWordText = itemView.findViewById<TextView>(R.id.entryWordText)
+        val entryWordText = itemView.findViewById<TextView>(R.id.entryWordText)!!
+
+        fun setOnClickListener(listener: View.OnClickListener) {
+            itemView.setOnClickListener(listener)
+        }
     }
 }

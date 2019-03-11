@@ -15,5 +15,10 @@
         <action android:id="@+id/action_entryListFragment_to_entryFragment" app:destination="@id/entryFragment"/>
     </fragment>
     <fragment android:id="@+id/entryFragment" android:name="com.rjdeleon.manobodictionary.feature.entry.EntryFragment"
-              android:label="fragment_entry" tools:layout="@layout/fragment_entry"/>
+              android:label="fragment_entry" tools:layout="@layout/fragment_entry">
+        <argument
+            android:name="entryId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>
