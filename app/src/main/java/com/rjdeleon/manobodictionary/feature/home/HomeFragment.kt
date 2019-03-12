@@ -47,7 +47,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupViewPager(vp: ViewPager) {
-        val adapter = HomeSectionsAdapter(fragmentManager!!)
+        val adapter = HomeSectionsAdapter(childFragmentManager)
 
         var c = 'A'
         while (c <= 'Z') {
