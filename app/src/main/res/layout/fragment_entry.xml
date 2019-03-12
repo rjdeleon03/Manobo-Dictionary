@@ -38,8 +38,37 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:padding="16dp"
             android:orientation="vertical"
             android:background="@drawable/shape_rounded_top_right">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/entry_notes"
+                style="@style/TitleTextViewTheme"/>
+
+            <TextView
+                android:id="@+id/entryNoteText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/entryRelatedWordText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/entry_definition"
+                android:layout_marginTop="24dp"
+                style="@style/TitleTextViewTheme"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/entryDefinitionRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 

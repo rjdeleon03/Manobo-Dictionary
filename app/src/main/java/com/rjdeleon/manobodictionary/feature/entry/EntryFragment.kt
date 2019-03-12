@@ -52,7 +52,9 @@ class EntryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mViewModel.getEntry().observe(this, Observer {
-          entryWordText.text = it.word
+            entryWordText.text = it.word
+            entryNoteText.text = it.note
+            entryRelatedWordText.text = it.relatedWord
         })
     }
 }
