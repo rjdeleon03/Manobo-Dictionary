@@ -1,21 +1,20 @@
 package com.rjdeleon.manobodictionary.feature.entrylist
 
 import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.rjdeleon.manobodictionary.R
+import com.rjdeleon.manobodictionary.base.BaseRecyclerViewAdapter
 import com.rjdeleon.manobodictionary.data.entities.Entry
 import com.rjdeleon.manobodictionary.feature.home.HomeFragmentDirections
 import java.lang.Exception
 
 class EntryListAdapter(context: Context) :
-    RecyclerView.Adapter<EntryListAdapter.EntryListViewHolder>() {
+    BaseRecyclerViewAdapter<EntryListAdapter.EntryListViewHolder>(context) {
 
-    private val mInflater = LayoutInflater.from(context)
     private lateinit var mEntries: List<Entry>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryListViewHolder {
@@ -23,7 +22,7 @@ class EntryListAdapter(context: Context) :
         return EntryListViewHolder(view)
     }
 
-    override fun getItemCount(): Int =
+    override fun getItemCount() =
         try {
             mEntries.size
         } catch(_: Exception) {

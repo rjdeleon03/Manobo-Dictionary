@@ -23,6 +23,7 @@ class EntryFragment : Fragment() {
 
     private val args: EntryFragmentArgs by navArgs()
     private lateinit var mViewModel: EntryViewModel
+    private lateinit var mAdapter: EntryMeaningSetAdapter
 
     companion object {
         /**
@@ -37,8 +38,11 @@ class EntryFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        /* Initialize viewModel and meaning set adapter */
         mViewModel = ViewModelProviders.of(this,
             EntryViewModelFactory(activity!!.application, args.entryId)).get(EntryViewModel::class.java)
+        mAdapter = EntryMeaningSetAdapter(context!!)
     }
 
     override fun onCreateView(
@@ -51,10 +55,13 @@ class EntryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        entryDefinitionRecyclerView.adapter = mAdapter
+
         mViewModel.getEntry().observe(this, Observer {
             entryWordText.text = it.word
             entryNoteText.text = it.note
             entryRelatedWordText.text = it.relatedWord
         })
+        mViewModel.getMeaningSets().observe(this, Observer(mAdapter::setMeaningSets))
     }
 }
