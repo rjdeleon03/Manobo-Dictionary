@@ -42,34 +42,56 @@
             android:orientation="vertical"
             android:background="@drawable/shape_rounded_top_right">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/entry_notes"
-                style="@style/TitleTextViewTheme"/>
-
-            <TextView
-                android:id="@+id/entryNoteText"
+            <LinearLayout
+                android:id="@+id/entryNoteGroup"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/entryRelatedWordText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/entry_definition"
-                android:layout_marginTop="24dp"
-                style="@style/TitleTextViewTheme"/>
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical"
+                android:visibility="gone">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/entryDefinitionRecyclerView"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/entry_notes"
+                    style="@style/TitleTextViewTheme"/>
+
+                <TextView
+                    android:id="@+id/entryNoteText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"/>
+
+                <TextView
+                    android:id="@+id/entryRelatedWordText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/entryDefinitionGroup"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/entry_definition"
+                    style="@style/TitleTextViewTheme"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/entryDefinitionRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

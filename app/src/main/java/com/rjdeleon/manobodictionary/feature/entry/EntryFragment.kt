@@ -59,9 +59,19 @@ class EntryFragment : Fragment() {
 
         mViewModel.getEntry().observe(this, Observer {
             entryWordText.text = it.word
+
+            if (it.note.isEmpty() && it.relatedWord.isEmpty())
+                return@Observer
+
+            entryNoteGroup.visibility = View.VISIBLE
             entryNoteText.text = it.note
             entryRelatedWordText.text = it.relatedWord
         })
-        mViewModel.getMeaningSets().observe(this, Observer(mAdapter::setMeaningSets))
+        mViewModel.getMeaningSets().observe(this, Observer{
+
+            if (it.isEmpty()) return@Observer
+            entryDefinitionGroup.visibility = View.VISIBLE
+            mAdapter.setMeaningSets(it)
+        })
     }
 }
