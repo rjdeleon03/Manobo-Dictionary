@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 
-import com.rjdeleon.manobodictionary.R
-import kotlinx.android.synthetic.main.fragment_entry.*
+import com.rjdeleon.manobodictionary.databinding.FragmentEntryBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -50,28 +48,13 @@ class EntryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_entry, container, false)
-    }
+        val binding = FragmentEntryBinding.inflate(inflater, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        entryDefinitionRecyclerView.adapter = mAdapter
+        /* Set viewModel, lifecycle owner, and adapter */
+        binding.viewModel = mViewModel
+        binding.lifecycleOwner = this
+        binding.entryDefinitionRecyclerView.adapter = mAdapter
 
-        mViewModel.getEntry().observe(this, Observer {
-            entryWordText.text = it.word
-
-            if (it.note.isEmpty() && it.relatedWord.isEmpty())
-                return@Observer
-
-            entryNoteGroup.visibility = View.VISIBLE
-            entryNoteText.text = it.note
-            entryRelatedWordText.text = it.relatedWord
-        })
-        mViewModel.getMeaningSets().observe(this, Observer{
-
-            if (it.isEmpty()) return@Observer
-            entryDefinitionGroup.visibility = View.VISIBLE
-            mAdapter.setMeaningSets(it)
-        })
+        return binding.root
     }
 }

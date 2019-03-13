@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 
 import com.rjdeleon.manobodictionary.R
+import com.rjdeleon.manobodictionary.databinding.FragmentEntryListBinding
 import kotlinx.android.synthetic.main.fragment_entry_list.*
 
 private const val ARG_LETTER = "ARG_LETTER"
@@ -61,12 +62,13 @@ class EntryListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_entry_list, container, false)
-    }
+        val binding = FragmentEntryListBinding.inflate(inflater, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        entryListRecyclerView.adapter = mAdapter
-        mViewModel.getEntries().observe(this, Observer(mAdapter::setEntries))
+        /* Set the viewModel, lifecycle owner, and adapter */
+        binding.viewModel = mViewModel
+        binding.lifecycleOwner = this
+        binding.entryListRecyclerView.adapter = mAdapter
+
+        return binding.root
     }
 }
