@@ -1,21 +1,45 @@
-package com.rjdeleon.manobodictionary
+package com.rjdeleon.manobodictionary.feature.main
 
-import android.app.Activity
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.google.android.material.textfield.TextInputEditText
+import com.rjdeleon.manobodictionary.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var mAdapter: MainSearchResultAdapter
+    private lateinit var mViewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        mAdapter = MainSearchResultAdapter(this)
+
+        mViewModel = MainViewModel(application)
+        mViewModel.getSearchResults().observe(this, Observer {
+            System.out.println("LOG!!!! ${it.size}")
+            mAdapter.setResults(it)
+        })
+
+        searchTextField.setAdapter(mAdapter)
+        searchTextField.addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                mViewModel.performSearch(p0.toString())
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        })
     }
 
     /**
