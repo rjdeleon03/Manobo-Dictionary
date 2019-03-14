@@ -16,7 +16,7 @@ interface MeaningSetDao {
     @Query("SELECT * FROM meaning_set")
     fun getAllMeaningSets() : LiveData<List<MeaningSet>>
 
-    @Query("SELECT word, part_of_speech, meaning " +
+    @Query("SELECT entry_id, word, part_of_speech, meaning " +
             "FROM meaning_set JOIN entry ON meaning_set.entry_id = entry.id " +
             "WHERE word LIKE :searchTerm or " +
             "part_of_speech LIKE :searchTerm or " +

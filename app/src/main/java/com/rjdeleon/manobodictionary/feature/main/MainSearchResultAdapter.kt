@@ -10,11 +10,16 @@ import com.rjdeleon.manobodictionary.R
 import com.rjdeleon.manobodictionary.data.entities.SearchResult
 import java.lang.Exception
 
-class MainSearchResultAdapter(context: Context)
+interface OnItemClickListener {
+    fun onItemClick(entryId: Int)
+}
+
+class MainSearchResultAdapter(context: Context, onItemClickListener: OnItemClickListener)
     : BaseAdapter(), Filterable {
 
     private val mInflater = LayoutInflater.from(context)
     private lateinit var mResults: List<SearchResult>
+    private var mClickListener = onItemClickListener
 
     fun setResults(results: List<SearchResult>) {
         mResults = results
@@ -59,10 +64,12 @@ class MainSearchResultAdapter(context: Context)
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view = mInflater.inflate(R.layout.item_search_result, parent, false)
-        view!!.findViewById<TextView>(R.id.searchResultWordText).text =
-            mResults[position].word
-        view.findViewById<TextView>(R.id.searchResultMeaningText).text =
-            mResults[position].meaning
+        val entry = mResults[position]
+        view.findViewById<TextView>(R.id.searchResultWordText).text = entry.word
+        view.findViewById<TextView>(R.id.searchResultMeaningText).text = entry.meaning
+        view.setOnClickListener {
+            mClickListener.onItemClick(entry.id)
+        }
         return view
     }
 }

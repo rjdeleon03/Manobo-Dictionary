@@ -10,26 +10,36 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import com.google.android.material.textfield.TextInputEditText
+import com.rjdeleon.manobodictionary.MainNavDirections
 import com.rjdeleon.manobodictionary.R
+import com.rjdeleon.manobodictionary.feature.home.HomeFragmentDirections
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mAdapter: MainSearchResultAdapter
     private lateinit var mViewModel: MainViewModel
+    private lateinit var mNavController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mAdapter = MainSearchResultAdapter(this)
+        mNavController = findNavController(R.id.navigationFragment)
+
+        mAdapter = MainSearchResultAdapter(this, object: OnItemClickListener {
+            override fun onItemClick(entryId: Int) {
+                val action = MainNavDirections.actionToEntryFragment(entryId)
+                mNavController.navigate(action)
+                clearViewFocus(searchTextField)
+            }
+        })
 
         mViewModel = MainViewModel(application)
-        mViewModel.getSearchResults().observe(this, Observer {
-            System.out.println("LOG!!!! ${it.size}")
-            mAdapter.setResults(it)
-        })
+        mViewModel.getSearchResults().observe(this, Observer(mAdapter::setResults))
 
         searchTextField.setAdapter(mAdapter)
         searchTextField.addTextChangedListener(object: TextWatcher {
