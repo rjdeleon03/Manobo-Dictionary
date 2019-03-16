@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
+import com.rjdeleon.manobodictionary.base.BaseFragment
 
 import com.rjdeleon.manobodictionary.databinding.FragmentSearchBinding
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -18,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_search.*
  * create an instance of this fragment.
  *
  */
-class SearchFragment : Fragment() {
+class SearchFragment : BaseFragment() {
 
     private lateinit var mViewModel: SearchViewModel
     private lateinit var mAdapter: SearchResultAdapter
@@ -47,6 +49,7 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupToolbar(searchToolbar, view.findNavController())
         searchTextField.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
@@ -57,6 +60,7 @@ class SearchFragment : Fragment() {
                 return true
             }
         })
+        searchTextField.isIconified = false
     }
 
 

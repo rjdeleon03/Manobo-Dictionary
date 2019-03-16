@@ -11,16 +11,31 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/homeTabLayout"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            app:tabSelectedTextColor="@android:color/white"
-            app:tabTextColor="@color/textColorLightGray"
-            app:tabMode="scrollable"/>
+            android:background="@drawable/shape_search_bar"
+            android:layout_margin="8dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/homeToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:title="@string/app_name"
+                app:titleTextColor="@color/textColorGray"/>
+
+        </FrameLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/homeTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:tabSelectedTextColor="@android:color/white"
+        app:tabTextColor="@color/textColorLightGray"
+        app:tabMode="scrollable"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/homeViewPager"
