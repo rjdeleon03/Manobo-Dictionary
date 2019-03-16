@@ -1,4 +1,4 @@
-package com.rjdeleon.manobodictionary.feature.main
+package com.rjdeleon.manobodictionary.feature
 
 import android.content.Context
 import android.graphics.Rect
@@ -15,7 +15,9 @@ import androidx.navigation.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.rjdeleon.manobodictionary.MainNavDirections
 import com.rjdeleon.manobodictionary.R
-import com.rjdeleon.manobodictionary.feature.home.HomeFragmentDirections
+import com.rjdeleon.manobodictionary.feature.main.MainSearchResultAdapter
+import com.rjdeleon.manobodictionary.feature.main.MainViewModel
+import com.rjdeleon.manobodictionary.feature.main.OnItemClickListener
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -30,13 +32,15 @@ class MainActivity : AppCompatActivity() {
 
         mNavController = findNavController(R.id.navigationFragment)
 
-        mAdapter = MainSearchResultAdapter(this, object: OnItemClickListener {
-            override fun onItemClick(entryId: Int) {
-                val action = MainNavDirections.actionToEntryFragment(entryId)
-                mNavController.navigate(action)
-                clearViewFocus(searchTextField)
-            }
-        })
+        mAdapter = MainSearchResultAdapter(
+            this,
+            object : OnItemClickListener {
+                override fun onItemClick(entryId: Int) {
+                    val action = MainNavDirections.actionToEntryFragment(entryId)
+                    mNavController.navigate(action)
+                    clearViewFocus(searchTextField)
+                }
+            })
 
         mViewModel = MainViewModel(application)
         mViewModel.getSearchResults().observe(this, Observer(mAdapter::setResults))
