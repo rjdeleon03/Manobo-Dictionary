@@ -9,7 +9,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="64dp">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -22,7 +22,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:title="@string/app_name"
-                app:titleTextColor="@color/textColorGray"/>
+                app:titleTextAppearance="@style/ActionBarTitleAppearance"
+                app:titleTextColor="@color/textColorGray"
+                android:paddingBottom="4dp"/>
 
         </FrameLayout>
 
