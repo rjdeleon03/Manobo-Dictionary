@@ -22,8 +22,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mAdapter: MainSearchResultAdapter
-    private lateinit var mViewModel: MainViewModel
     private lateinit var mNavController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,28 +30,10 @@ class MainActivity : AppCompatActivity() {
 
         mNavController = findNavController(R.id.navigationFragment)
 
-        mAdapter = MainSearchResultAdapter(
-            this,
-            object : OnItemClickListener {
-                override fun onItemClick(entryId: Int) {
-                    val action = MainNavDirections.actionToEntryFragment(entryId)
-                    mNavController.navigate(action)
-                    clearViewFocus(searchTextField)
-                }
-            })
-
-        mViewModel = MainViewModel(application)
-        mViewModel.getSearchResults().observe(this, Observer(mAdapter::setResults))
-
-        searchTextField.setAdapter(mAdapter)
-        searchTextField.addTextChangedListener(object: TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {
-                mViewModel.performSearch(p0.toString())
-            }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        })
+        searchTextField.setOnClickListener {
+            val action = MainNavDirections.actionToSearchFragment()
+            mNavController.navigate(action)
+        }
     }
 
     /**

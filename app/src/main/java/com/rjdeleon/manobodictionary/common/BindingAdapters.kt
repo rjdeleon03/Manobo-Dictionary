@@ -6,8 +6,10 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.rjdeleon.manobodictionary.data.entities.Entry
 import com.rjdeleon.manobodictionary.data.entities.MeaningSet
+import com.rjdeleon.manobodictionary.data.entities.SearchResult
 import com.rjdeleon.manobodictionary.feature.entry.EntryMeaningSetAdapter
 import com.rjdeleon.manobodictionary.feature.entrylist.EntryListAdapter
+import com.rjdeleon.manobodictionary.feature.search.SearchResultAdapter
 
 @BindingAdapter("wordBasedVisibility")
 fun setWordBasedVisibility(v: View, e: Entry?) {
@@ -55,5 +57,18 @@ fun setMeaningSets(rv: RecyclerView, ms: List<MeaningSet>?) {
     val adapter = rv.adapter
     if (adapter is EntryMeaningSetAdapter) {
         adapter.setMeaningSets(ms)
+    }
+}
+
+@BindingAdapter("searchResults")
+fun setSearchResults(rv: RecyclerView, sr: List<SearchResult>?) {
+
+    val adapter = rv.adapter
+    if (adapter is SearchResultAdapter) {
+        if (sr.isNullOrEmpty()) {
+            adapter.setResults(ArrayList())
+            return
+        }
+        adapter.setResults(sr)
     }
 }

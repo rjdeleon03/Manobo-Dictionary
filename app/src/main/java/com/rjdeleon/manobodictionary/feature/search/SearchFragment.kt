@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.lifecycle.ViewModelProviders
 
-import com.rjdeleon.manobodictionary.R
+import com.rjdeleon.manobodictionary.databinding.FragmentSearchBinding
 import kotlinx.android.synthetic.main.fragment_search.*
 
 /**
@@ -36,7 +36,12 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        val binding = FragmentSearchBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.viewModel = mViewModel
+        binding.searchRecyclerView.adapter = mAdapter
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

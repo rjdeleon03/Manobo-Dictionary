@@ -12,9 +12,14 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
     private val mSearchResults = MediatorLiveData<List<SearchResult>>()
     private var mSource: LiveData<List<SearchResult>>? = null
 
-    fun getSearchResults() = mSearchResults
+    fun getSearchResults(): LiveData<List<SearchResult>> = mSearchResults
 
     fun performSearch(searchTerm: String) {
+        if (searchTerm.isBlank()) {
+            mSearchResults.value = null
+            return
+        }
+
         if (mSource != null) {
             mSearchResults.removeSource(mSource!!)
         }
