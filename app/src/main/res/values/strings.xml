@@ -6,4 +6,7 @@
     <string name="entry_notes">Notes</string>
     <string name="entry_definition">Definition</string>
     <string name="search_label">Search dictionary</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_sil">SIL Philippines</string>
+    <string name="menu_sos">Save Our Schools</string>
 </resources>

@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI.navigateUp
 import com.rjdeleon.manobodictionary.base.BaseFragment
 
 import com.rjdeleon.manobodictionary.databinding.FragmentSearchBinding
@@ -24,6 +27,7 @@ class SearchFragment : BaseFragment() {
 
     private lateinit var mViewModel: SearchViewModel
     private lateinit var mAdapter: SearchResultAdapter
+    private lateinit var mNavController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +53,10 @@ class SearchFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupToolbar(searchToolbar, view.findNavController())
+        mNavController = view.findNavController()
+        setupToolbar(searchToolbar, mNavController, View.OnClickListener {
+            (activity as AppCompatActivity).onBackPressed()
+        })
         searchTextField.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
