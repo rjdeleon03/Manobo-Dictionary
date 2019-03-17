@@ -54,9 +54,6 @@ class SearchFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mNavController = view.findNavController()
-        setupToolbar(searchToolbar, mNavController, View.OnClickListener {
-            (activity as AppCompatActivity).onBackPressed()
-        })
         searchTextField.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true

@@ -29,7 +29,6 @@ import kotlinx.android.synthetic.main.fragment_home.*
  */
 class HomeFragment : BaseFragment() {
 
-    private lateinit var mAppBarConfig: AppBarConfiguration
     private lateinit var mNavController: NavController
 
     override fun onCreateView(
@@ -56,33 +55,9 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mNavController = view.findNavController()
-        setupNavigation()
 
         setupViewPager(homeViewPager)
         homeTabLayout.setupWithViewPager(homeViewPager)
-    }
-
-    private fun setupNavigation() {
-
-        /* Create app bar config with top destinations */
-        mAppBarConfig = AppBarConfiguration
-            .Builder(setOf(R.id.homeFragment))
-            .setDrawerLayout(homeDrawerLayout)
-            .build()
-
-        homeToolbar.setOnClickListener {
-            val action = HomeFragmentDirections
-                .actionHomeFragmentToSearchFragment()
-            mNavController.navigate(action)
-        }
-
-        setupToolbar(homeToolbar, mNavController, View.OnClickListener {
-            homeDrawerLayout.openDrawer(GravityCompat.START)
-        })
-        setupActionBarWithNavController(activity as AppCompatActivity,
-            mNavController, mAppBarConfig)
-        setupWithNavController(homeNavigationView, mNavController)
-        homeNavigationView.menu.getItem(0).isChecked = true
     }
 
     private fun setupViewPager(vp: ViewPager) {
