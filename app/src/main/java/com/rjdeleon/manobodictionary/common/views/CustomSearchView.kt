@@ -11,9 +11,14 @@ import androidx.appcompat.widget.Toolbar
 import com.rjdeleon.manobodictionary.R
 import kotlinx.android.synthetic.main.custom_search_view.view.*
 
-
 class CustomSearchView(context: Context, attrs: AttributeSet)
     : LinearLayout(context, attrs) {
+
+    enum class SearchViewState {
+        DEFAULT,
+        SEARCH,
+        EMPTY
+    }
 
     var toolbar: Toolbar?
     var searchFocusChangeListener: (() -> Unit)? = null
@@ -21,6 +26,7 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
     private var cardLayoutParams: LinearLayout.LayoutParams
     private var cardMargin: Int? = null
     private var cardRadius: Float? = null
+    private var mState = SearchViewState.DEFAULT
 
     init {
         View.inflate(context, R.layout.custom_search_view, this)
@@ -41,6 +47,10 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
         searchView.setOnQueryTextFocusChangeListener { view, b ->
             if(b) {
                 searchFocusChangeListener?.invoke()
+
+                if (mState != SearchViewState.DEFAULT)
+                    return@setOnQueryTextFocusChangeListener
+
                 val a = object : Animation() {
 
                     override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
@@ -52,6 +62,7 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
                     }
                 }
                 a.duration = 120
+                mState = SearchViewState.SEARCH
                 view.startAnimation(a)
             }
         }
@@ -76,17 +87,26 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
     }
 
     fun collapseSearchView() {
-        val a = object: Animation() {
+        when(mState) {
+            SearchViewState.SEARCH -> {
+                val a = object : Animation() {
 
-            override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
-                val margin = (cardMargin!! * interpolatedTime).toInt()
-                val radius = cardRadius!! * interpolatedTime
-                cardView.radius = radius
-                cardLayoutParams.setMargins(margin, margin, margin, margin)
-                cardView.layoutParams = cardLayoutParams
+                    override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
+                        val margin = (cardMargin!! * interpolatedTime).toInt()
+                        val radius = cardRadius!! * interpolatedTime
+                        cardView.radius = radius
+                        cardLayoutParams.setMargins(margin, margin, margin, margin)
+                        cardView.layoutParams = cardLayoutParams
+
+                        if (1f - interpolatedTime < 0.01) {
+                            mState = SearchViewState.DEFAULT
+                        }
+                    }
+                }
+                a.duration = 120
+                cardView.startAnimation(a)
             }
+            else -> {}
         }
-        a.duration = 120
-        cardView.startAnimation(a)
     }
 }
