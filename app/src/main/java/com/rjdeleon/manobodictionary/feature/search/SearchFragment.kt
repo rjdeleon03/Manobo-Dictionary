@@ -54,17 +54,17 @@ class SearchFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mNavController = view.findNavController()
-        searchTextField.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                mViewModel.performSearch(newText!!)
-                return true
-            }
-        })
-        searchTextField.isIconified = false
+//        searchTextField.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                return true
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                mViewModel.performSearch(newText!!)
+//                return true
+//            }
+//        })
+//        searchTextField.isIconified = false
     }
 
 

@@ -16,29 +16,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <FrameLayout
+        <com.rjdeleon.manobodictionary.common.views.CustomSearchView
+            android:id="@+id/mainSearchView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_margin="8dp"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="4dp">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/mainToolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:title="@string/app_name"
-                    app:titleTextAppearance="@style/ActionBarTitleAppearance"
-                    app:titleTextColor="@color/textColorGray"
-                    android:paddingBottom="4dp"/>
-
-            </androidx.cardview.widget.CardView>
-
-        </FrameLayout>
+            android:layout_height="wrap_content"
+            app:cardRadius="2dp"
+            app:searchHint="@string/search_label"/>
 
         <fragment
             android:id="@+id/navigationFragment"
@@ -53,5 +36,13 @@
             app:navGraph="@navigation/main_nav" />
 
     </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/mainNavigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/home_menu_header"
+        app:menu="@menu/main_menu"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

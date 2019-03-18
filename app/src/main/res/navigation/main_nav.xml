@@ -3,6 +3,9 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/main_nav"
             app:startDestination="@id/homeFragment">
+    <action
+        android:id="@+id/action_to_searchFragment"
+        app:destination="@id/searchFragment" />
 
     <fragment android:id="@+id/homeFragment" android:name="com.rjdeleon.manobodictionary.feature.home.HomeFragment"
               android:label="@string/search_label" tools:layout="@layout/fragment_home">
