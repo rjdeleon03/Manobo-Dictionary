@@ -1,6 +1,9 @@
 package com.rjdeleon.manobodictionary.common.views
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.Animation
@@ -8,6 +11,7 @@ import android.view.animation.Transformation
 import android.widget.LinearLayout
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import com.rjdeleon.manobodictionary.R
 import kotlinx.android.synthetic.main.custom_search_view.view.*
 
@@ -26,6 +30,7 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
     private var cardLayoutParams: LinearLayout.LayoutParams
     private var cardMargin: Int? = null
     private var cardRadius: Float? = null
+    private var cardElevation: Float? = null
     private var mState = SearchViewState.DEFAULT
 
     init {
@@ -41,6 +46,7 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
         /* Retrieve card margins and radius */
         cardLayoutParams = cardView.layoutParams as LinearLayout.LayoutParams
         cardMargin = cardLayoutParams.topMargin
+        cardElevation = cardView.cardElevation
         cardRadius = cardView.radius
 
         /* Set card view animation based on search view focus */
@@ -86,7 +92,7 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
         })
     }
 
-    fun collapseSearchView() {
+    fun restoreSearchView() {
         when(mState) {
             SearchViewState.SEARCH -> {
                 val a = object : Animation() {
@@ -106,7 +112,64 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
                 a.duration = 120
                 cardView.startAnimation(a)
             }
+            SearchViewState.EMPTY -> {
+                val a = object : Animation() {
+
+                    override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
+                        val margin = (cardMargin!! * interpolatedTime).toInt()
+                        val radius = cardRadius!! * interpolatedTime
+                        cardView.radius = radius
+                        cardLayoutParams.setMargins(margin, margin, margin, margin)
+                        cardView.layoutParams = cardLayoutParams
+                        searchView.alpha = interpolatedTime
+
+                        if (interpolatedTime < 0.01) {
+                            toolbar?.navigationIcon
+                                ?.setColorFilter(ContextCompat.getColor(context!!, android.R.color.black), PorterDuff.Mode.SRC_ATOP)
+                            cardView.cardElevation = cardElevation!!
+                            searchView.visibility = View.VISIBLE
+                            cardView.setCardBackgroundColor(ContextCompat.getColor(context!!, android.R.color.white))
+                        }
+
+                        if (1f - interpolatedTime < 0.01) {
+                            mState = SearchViewState.DEFAULT
+                        }
+                    }
+                }
+                a.duration = 120
+                cardView.startAnimation(a)
+            }
             else -> {}
+        }
+    }
+
+    fun clearSearchView() {
+        if (mState == SearchViewState.DEFAULT) {
+
+            toolbar?.navigationIcon
+                ?.setColorFilter(ContextCompat.getColor(context!!, android.R.color.white), PorterDuff.Mode.SRC_ATOP)
+            cardView.setCardBackgroundColor(ContextCompat.getColor(context!!, android.R.color.transparent))
+            cardView.cardElevation = 0f
+
+            val a = object : Animation() {
+
+                override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
+                    val margin = (cardMargin!! - cardMargin!! * interpolatedTime).toInt()
+                    val radius = cardRadius!! - cardRadius!! * interpolatedTime
+                    cardView.radius = radius
+                    cardLayoutParams.setMargins(margin, margin, margin, margin)
+                    cardView.layoutParams = cardLayoutParams
+                    searchView.alpha = 1- interpolatedTime
+
+
+                    if (1f - interpolatedTime < 0.01) {
+                        searchView.visibility = View.GONE
+                        mState = SearchViewState.EMPTY
+                    }
+                }
+            }
+            a.duration = 120
+            cardView.startAnimation(a)
         }
     }
 }

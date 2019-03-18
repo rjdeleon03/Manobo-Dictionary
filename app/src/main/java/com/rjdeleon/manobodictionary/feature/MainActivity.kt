@@ -2,7 +2,6 @@ package com.rjdeleon.manobodictionary.feature
 
 import android.content.Context
 import android.os.Bundle
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -52,10 +51,16 @@ class MainActivity : AppCompatActivity() {
                         mainDrawerLayout.openDrawer(GravityCompat.START)
                     }
 
-                    mainSearchView?.collapseSearchView()
+                    mainSearchView?.restoreSearchView()
                     currentFocus?.clearFocus()
                     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+                }
+                R.id.entryFragment -> {
+                    mainSearchView?.clearSearchView()
+                    toolbar?.setNavigationOnClickListener {
+                        onBackPressed()
+                    }
                 }
                 else -> {
                     toolbar?.setNavigationOnClickListener {
