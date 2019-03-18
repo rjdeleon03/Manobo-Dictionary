@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.rjdeleon.manobodictionary.feature.search.SearchViewModel"/>
+            type="com.rjdeleon.manobodictionary.feature.search.SharedSearchViewModel"/>
     </data>
 
     <LinearLayout

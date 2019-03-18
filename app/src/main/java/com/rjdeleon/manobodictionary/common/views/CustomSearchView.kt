@@ -6,6 +6,7 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.Transformation
 import android.widget.LinearLayout
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import com.rjdeleon.manobodictionary.R
 import kotlinx.android.synthetic.main.custom_search_view.view.*
@@ -16,7 +17,8 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
 
     var toolbar: Toolbar?
     var searchFocusChangeListener: (() -> Unit)? = null
-    private lateinit var cardLayoutParams: LinearLayout.LayoutParams
+    var searchTextChangeListener: ((String) -> Unit)? = null
+    private var cardLayoutParams: LinearLayout.LayoutParams
     private var cardMargin: Int? = null
     private var cardRadius: Float? = null
 
@@ -53,6 +55,24 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
                 view.startAnimation(a)
             }
         }
+
+        /* Listen to text changes in search view */
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchTextChangeListener?.invoke(
+                    query ?: ""
+                )
+                return true
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                searchTextChangeListener?.invoke(
+                    query ?: ""
+                )
+                return true
+            }
+
+        })
     }
 
     fun collapseSearchView() {
@@ -69,23 +89,4 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
         a.duration = 120
         cardView.startAnimation(a)
     }
-
-    /*
-
-    fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
-                    var margin = cardMargin * interpolatedTime
-                    var radius = cardRadius * interpolatedTime
-
-                    if (b) {
-                        margin = cardMargin - margin
-                        radius = cardRadius - radius
-                    }
-
-                    cardView.radius = radius
-                    val intMargin = margin.toInt()
-                    cardLayoutParams.setMargins(intMargin, intMargin, intMargin, intMargin)
-                    cardView.layoutParams = cardLayoutParams
-                }
-
-     */
 }
