@@ -2,9 +2,9 @@ package com.rjdeleon.manobodictionary.feature.home
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
 
-class HomeSectionsAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class HomeSectionsAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     private val mFragmentList = ArrayList<Fragment>()
     private val mFragmentTitleList = ArrayList<String>()

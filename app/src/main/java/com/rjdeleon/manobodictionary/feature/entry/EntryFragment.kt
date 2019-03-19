@@ -52,7 +52,7 @@ class EntryFragment : Fragment() {
 
         /* Set viewModel, lifecycle owner, and adapter */
         binding.viewModel = mViewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.entryDefinitionRecyclerView.adapter = mAdapter
 
         return binding.root
