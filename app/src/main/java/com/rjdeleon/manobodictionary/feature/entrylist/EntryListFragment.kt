@@ -6,12 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 
-import com.rjdeleon.manobodictionary.R
 import com.rjdeleon.manobodictionary.databinding.FragmentEntryListBinding
-import kotlinx.android.synthetic.main.fragment_entry_list.*
 
 private const val ARG_LETTER = "ARG_LETTER"
 

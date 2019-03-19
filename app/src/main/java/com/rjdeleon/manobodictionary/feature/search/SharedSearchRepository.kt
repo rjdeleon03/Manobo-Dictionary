@@ -3,7 +3,7 @@ package com.rjdeleon.manobodictionary.feature.search
 import android.app.Application
 import com.rjdeleon.manobodictionary.data.DictionaryDatabase
 
-class SearchRepository(application: Application) {
+class SharedSearchRepository(application: Application) {
 
     private val mDatabase = DictionaryDatabase.getDatabase(application.applicationContext)
 

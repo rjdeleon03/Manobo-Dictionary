@@ -5,19 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
-import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.viewpager.widget.ViewPager
 
 import com.rjdeleon.manobodictionary.R
-import com.rjdeleon.manobodictionary.base.BaseFragment
 import com.rjdeleon.manobodictionary.feature.entrylist.EntryListFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -27,9 +20,8 @@ import kotlinx.android.synthetic.main.fragment_home.*
  * create an instance of this fragment.
  *
  */
-class HomeFragment : BaseFragment() {
+class HomeFragment : Fragment() {
 
-    private lateinit var mAppBarConfig: AppBarConfiguration
     private lateinit var mNavController: NavController
 
     override fun onCreateView(
@@ -56,33 +48,9 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mNavController = view.findNavController()
-        setupNavigation()
 
         setupViewPager(homeViewPager)
         homeTabLayout.setupWithViewPager(homeViewPager)
-    }
-
-    private fun setupNavigation() {
-
-        /* Create app bar config with top destinations */
-        mAppBarConfig = AppBarConfiguration
-            .Builder(setOf(R.id.homeFragment))
-            .setDrawerLayout(homeDrawerLayout)
-            .build()
-
-        homeToolbar.setOnClickListener {
-            val action = HomeFragmentDirections
-                .actionHomeFragmentToSearchFragment()
-            mNavController.navigate(action)
-        }
-
-        setupToolbar(homeToolbar, mNavController, View.OnClickListener {
-            homeDrawerLayout.openDrawer(GravityCompat.START)
-        })
-        setupActionBarWithNavController(activity as AppCompatActivity,
-            mNavController, mAppBarConfig)
-        setupWithNavController(homeNavigationView, mNavController)
-        homeNavigationView.menu.getItem(0).isChecked = true
     }
 
     private fun setupViewPager(vp: ViewPager) {

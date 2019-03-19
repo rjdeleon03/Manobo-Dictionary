@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,68 +11,20 @@
     android:background="@color/colorPrimary"
     tools:context=".feature.home.HomeFragment">
 
-    <LinearLayout
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/homeTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:tabSelectedTextColor="@android:color/white"
+        app:tabTextColor="@color/textColorLightGray"
+        app:tabMode="scrollable"
+        app:elevation="4dp"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/homeViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@android:color/white" />
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_margin="8dp"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="4dp">
-
-                    <androidx.appcompat.widget.Toolbar
-                        android:id="@+id/homeToolbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:title="@string/app_name"
-                        app:titleTextAppearance="@style/ActionBarTitleAppearance"
-                        app:titleTextColor="@color/textColorGray"
-                        android:paddingBottom="4dp"/>
-
-                </androidx.cardview.widget.CardView>
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/homeTabLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@color/colorPrimary"
-                    app:tabSelectedTextColor="@android:color/white"
-                    app:tabTextColor="@color/textColorLightGray"
-                    app:tabMode="scrollable"
-                    app:elevation="0dp"/>
-
-            </LinearLayout>
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/homeViewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white">
-
-        </androidx.viewpager.widget.ViewPager>
-
-    </LinearLayout>
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/homeNavigationView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/home_menu_header"
-        app:menu="@menu/main_menu"/>
-
-</androidx.drawerlayout.widget.DrawerLayout>
+</LinearLayout>

@@ -6,16 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI.navigateUp
-import com.rjdeleon.manobodictionary.base.BaseFragment
 
 import com.rjdeleon.manobodictionary.databinding.FragmentSearchBinding
-import kotlinx.android.synthetic.main.fragment_search.*
 
 /**
  * A simple [Fragment] subclass.
@@ -23,17 +16,18 @@ import kotlinx.android.synthetic.main.fragment_search.*
  * create an instance of this fragment.
  *
  */
-class SearchFragment : BaseFragment() {
+class SearchFragment : Fragment() {
 
-    private lateinit var mViewModel: SearchViewModel
+    private lateinit var mViewModel: SharedSearchViewModel
     private lateinit var mAdapter: SearchResultAdapter
-    private lateinit var mNavController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         /* Initialize viewModel and adapter */
-        mViewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
+        mViewModel = activity?.run {
+            ViewModelProviders.of(this).get(SharedSearchViewModel::class.java)
+        } ?: throw Exception("Invalid activity")
         mAdapter = SearchResultAdapter(context!!)
     }
 
@@ -48,26 +42,6 @@ class SearchFragment : BaseFragment() {
         binding.searchRecyclerView.adapter = mAdapter
 
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        mNavController = view.findNavController()
-        setupToolbar(searchToolbar, mNavController, View.OnClickListener {
-            (activity as AppCompatActivity).onBackPressed()
-        })
-        searchTextField.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                mViewModel.performSearch(newText!!)
-                return true
-            }
-        })
-        searchTextField.isIconified = false
     }
 
 
