@@ -19,29 +19,31 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
     var toolbar: Toolbar?
     var searchFocusChangeListener: (() -> Unit)? = null
     var searchTextChangeListener: ((String) -> Unit)? = null
-    private var cardLayoutParams: LinearLayout.LayoutParams
-    private var cardMargin: Int? = null
-    private var cardRadius: Float? = null
-    private var cardElevation: Float? = null
 
-    private fun getCardMargin() = (cardView.layoutParams as LinearLayout.LayoutParams).topMargin
-    private fun getCardRadius() = cardView.radius
+    private var mCardLayoutParams: LinearLayout.LayoutParams
+    private var mCardMargin: Int? = null
+    private var mCardRadius: Float? = null
+    private var mCardElevation: Float? = null
 
     init {
         View.inflate(context, R.layout.custom_search_view, this)
         toolbar = cardToolbar
 
-        /* Retrieve view attributes then set */
+        /* Retrieve view attributes then apply */
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.CustomSearchView)
         searchView.queryHint = attributes.getString(R.styleable.CustomSearchView_searchHint)
         cardView.radius = attributes.getDimension(R.styleable.CustomSearchView_cardRadius, 0f)
         attributes.recycle()
 
         /* Retrieve card margins and radius */
-        cardLayoutParams = cardView.layoutParams as LinearLayout.LayoutParams
-        cardMargin = cardLayoutParams.topMargin
-        cardElevation = cardView.cardElevation
-        cardRadius = cardView.radius
+        mCardLayoutParams = cardView.layoutParams as LinearLayout.LayoutParams
+        mCardMargin = mCardLayoutParams.topMargin
+        mCardElevation = cardView.cardElevation
+        mCardRadius = cardView.radius
+        setupSearchView()
+    }
+
+    private fun setupSearchView() {
 
         /* Set card view animation based on search view focus */
         searchView.setOnQueryTextFocusChangeListener { _, b ->
@@ -54,140 +56,128 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
         /* Listen to text changes in search view */
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                searchTextChangeListener?.invoke(
-                    query ?: ""
-                )
+                searchTextChangeListener?.invoke(query ?: "")
                 return true
             }
 
             override fun onQueryTextChange(query: String?): Boolean {
-                searchTextChangeListener?.invoke(
-                    query ?: ""
-                )
+                searchTextChangeListener?.invoke(query ?: "")
                 return true
             }
-
         })
     }
+
+    // region Toolbar animations
 
     fun switchToDefaultState() {
         val currCardMargin = getCardMargin()
         val currCardRadius = getCardRadius()
-        val searchBarUpdateNeeded = !isSearchBarVisible()
+        val searchBarUpdateNeeded = !searchView.isVisible()
         val marginUpdateNeeded = currCardMargin == 0 && currCardRadius.isAlmostZero()
-        if (!marginUpdateNeeded && !searchBarUpdateNeeded)
-        {
-            return
+        val searchBarUpdateActionImmediate: () -> Unit = {
+            setSearchBarState(true)
         }
 
-        setSearchBarState(true)
-
-        val a = object : Animation() {
-
-            override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
-                if (marginUpdateNeeded) {
-                    val margin = (cardMargin!! * interpolatedTime).toInt()
-                    val radius = cardRadius!! * interpolatedTime
-                    cardView.radius = radius
-                    cardLayoutParams.setMargins(margin, margin, margin, margin)
-                    cardView.layoutParams = cardLayoutParams
-                }
-
-                if (searchBarUpdateNeeded) {
-                    searchView.alpha = interpolatedTime
-                }
-
-                if ((1f - interpolatedTime).isAlmostZero()) {
-                    searchView.visibility = View.VISIBLE
-                }
-            }
+        val searchBarUpdateActionIncremental: (Float) -> Unit = { interpolatedTime ->
+            searchView.alpha = interpolatedTime
         }
-        a.duration = 120
-        cardView.startAnimation(a)
+
+        val marginUpdateAction: (Float) -> Unit = { interpolatedTime ->
+            val margin = (mCardMargin!! * interpolatedTime).toInt()
+            val radius = mCardRadius!! * interpolatedTime
+            cardView.radius = radius
+            mCardLayoutParams.setMargins(margin, margin, margin, margin)
+            cardView.layoutParams = mCardLayoutParams
+        }
+
+        val animationFinishedAction: () -> Unit = {
+            searchView.visibility = View.VISIBLE
+        }
+
+        performToolbarAnimations(cardView,
+            marginUpdateNeeded,
+            marginUpdateAction,
+            searchBarUpdateNeeded,
+            searchBarUpdateActionImmediate,
+            searchBarUpdateActionIncremental,
+            animationFinishedAction)
     }
 
     fun switchToSearchState() {
         val currCardMargin = getCardMargin()
         val currCardRadius = getCardRadius()
-        val searchBarUpdateNeeded = !isSearchBarVisible()
+        val searchBarUpdateNeeded = !searchView.isVisible()
         val marginUpdateNeeded = currCardMargin > 0 && !currCardRadius.isAlmostZero()
-        if (!marginUpdateNeeded && !searchBarUpdateNeeded)
-        {
-            return
+        val searchBarUpdateActionImmediate: () -> Unit = {
+            setSearchBarState(true)
         }
 
-        setSearchBarState(true)
-
-        val a = object : Animation() {
-
-            override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
-                if (marginUpdateNeeded) {
-                    val margin = (currCardMargin - currCardMargin * interpolatedTime).toInt()
-                    val radius = currCardRadius - currCardRadius * interpolatedTime
-                    cardView.radius = radius
-                    cardLayoutParams.setMargins(margin, margin, margin, margin)
-                    cardView.layoutParams = cardLayoutParams
-                }
-
-                if (searchBarUpdateNeeded) {
-                    searchView.alpha = interpolatedTime
-                }
-
-                if ((1f - interpolatedTime).isAlmostZero()) {
-                    searchView.visibility = View.VISIBLE
-                }
-            }
+        val searchBarUpdateActionIncremental: (Float) -> Unit = { interpolatedTime ->
+            searchView.alpha = interpolatedTime
         }
-        a.duration = 120
-        cardView.startAnimation(a)
+
+        val marginUpdateAction: (Float) -> Unit = { interpolatedTime ->
+            val margin = (currCardMargin - currCardMargin * interpolatedTime).toInt()
+            val radius = currCardRadius - currCardRadius * interpolatedTime
+            cardView.radius = radius
+            mCardLayoutParams.setMargins(margin, margin, margin, margin)
+            cardView.layoutParams = mCardLayoutParams
+        }
+
+        val animationFinishedAction: () -> Unit = {
+            searchView.visibility = View.VISIBLE
+        }
+
+        performToolbarAnimations(cardView,
+            marginUpdateNeeded,
+            marginUpdateAction,
+            searchBarUpdateNeeded,
+            searchBarUpdateActionImmediate,
+            searchBarUpdateActionIncremental,
+            animationFinishedAction)
     }
 
     fun switchToEmptyState() {
         val currCardMargin = getCardMargin()
         val currCardRadius = getCardRadius()
-        val searchBarUpdateNeeded = isSearchBarVisible()
+        val searchBarUpdateNeeded = searchView.isVisible()
         val marginUpdateNeeded = currCardMargin > 0 || !currCardRadius.isAlmostZero()
-        if (!marginUpdateNeeded && !searchBarUpdateNeeded)
-        {
-            return
+
+        val searchBarUpdateActionImmediate: () -> Unit = {
+            setSearchBarState(false)
         }
 
-        setSearchBarState(false)
-
-        val a = object : Animation() {
-
-            override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
-                if (marginUpdateNeeded) {
-                    val margin = (cardMargin!! - cardMargin!! * interpolatedTime).toInt()
-                    val radius = cardRadius!! - cardRadius!! * interpolatedTime
-                    cardView.radius = radius
-                    cardLayoutParams.setMargins(margin, margin, margin, margin)
-                    cardView.layoutParams = cardLayoutParams
-                }
-
-                if (searchBarUpdateNeeded) {
-                    searchView.alpha = 1 - interpolatedTime
-                }
-
-                if (1f - interpolatedTime < 0.01) {
-                    searchView.visibility = View.GONE
-                }
-            }
+        val searchBarUpdateActionIncremental: (Float) -> Unit = { interpolatedTime ->
+            searchView.alpha = 1 - interpolatedTime
         }
-        a.duration = 120
-        cardView.startAnimation(a)
 
+        val marginUpdateAction: (Float) -> Unit = { interpolatedTime ->
+            val margin = (mCardMargin!! - mCardMargin!! * interpolatedTime).toInt()
+            val radius = mCardRadius!! - mCardRadius!! * interpolatedTime
+            cardView.radius = radius
+            mCardLayoutParams.setMargins(margin, margin, margin, margin)
+            cardView.layoutParams = mCardLayoutParams
+        }
+
+        val animationFinishedAction: () -> Unit = {
+            searchView.visibility = View.GONE
+        }
+
+        performToolbarAnimations(cardView,
+            marginUpdateNeeded,
+            marginUpdateAction,
+            searchBarUpdateNeeded,
+            searchBarUpdateActionImmediate,
+            searchBarUpdateActionIncremental,
+            animationFinishedAction)
     }
-
-    private fun getColor(id: Int) =
-        ContextCompat.getColor(context!!, id)
 
     private fun setSearchBarState(isDefault: Boolean = true) {
         if (isDefault) {
             toolbar?.navigationIcon
                 ?.setColorFilter(getColor(android.R.color.black), PorterDuff.Mode.SRC_ATOP)
             cardView.setCardBackgroundColor(getColor(android.R.color.white))
-            cardView.cardElevation = cardElevation!!
+            cardView.cardElevation = mCardElevation!!
         } else {
             toolbar?.navigationIcon
                 ?.setColorFilter(ContextCompat.getColor(context!!, android.R.color.white), PorterDuff.Mode.SRC_ATOP)
@@ -196,7 +186,51 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
         }
     }
 
-    private fun isSearchBarVisible() = searchView.visibility == View.VISIBLE
+    private fun performToolbarAnimations(viewToAnimate: View,
+                                         marginUpdateNeeded: Boolean,
+                                         marginUpdateAction: (interpolatedTime: Float) -> Unit,
+                                         searchBarUpdateNeeded: Boolean,
+                                         searchBarUpdateActionImmediate: () -> Unit,
+                                         searchBarUpdateActionIncremental: (interpolatedTime: Float) -> Unit,
+                                         animationFinishedAction: () -> Unit) {
+
+        if (!marginUpdateNeeded && !searchBarUpdateNeeded)
+            return
+
+        searchBarUpdateActionImmediate.invoke()
+
+        val a = object : Animation() {
+            override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
+                if (marginUpdateNeeded) {
+                    marginUpdateAction.invoke(interpolatedTime)
+                }
+
+                if (searchBarUpdateNeeded) {
+                    searchBarUpdateActionIncremental.invoke(interpolatedTime)
+                }
+
+                if ((1f - interpolatedTime).isAlmostZero()) {
+                    animationFinishedAction.invoke()
+                }
+            }
+        }
+        a.duration = 120
+        viewToAnimate.startAnimation(a)
+    }
+
+    // endregion
+
+    // region Extensions and utilities
+
+    private fun getCardMargin() = (cardView.layoutParams as LinearLayout.LayoutParams).topMargin
+
+    private fun getCardRadius() = cardView.radius
+
+    private fun getColor(id: Int) = ContextCompat.getColor(context!!, id)
+
+    private fun View.isVisible() = this.visibility == View.VISIBLE
 
     private fun Float.isAlmostZero() = this < 0.01
+
+    // endregion
 }
