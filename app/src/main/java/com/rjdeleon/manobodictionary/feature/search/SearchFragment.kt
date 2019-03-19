@@ -7,9 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import com.rjdeleon.manobodictionary.base.BaseFragment
 
 import com.rjdeleon.manobodictionary.databinding.FragmentSearchBinding
 
@@ -19,7 +16,7 @@ import com.rjdeleon.manobodictionary.databinding.FragmentSearchBinding
  * create an instance of this fragment.
  *
  */
-class SearchFragment : BaseFragment() {
+class SearchFragment : Fragment() {
 
     private lateinit var mViewModel: SharedSearchViewModel
     private lateinit var mAdapter: SearchResultAdapter
