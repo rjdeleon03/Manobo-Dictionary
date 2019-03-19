@@ -37,7 +37,7 @@ class SearchFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val binding = FragmentSearchBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = mViewModel
         binding.searchRecyclerView.adapter = mAdapter
 
