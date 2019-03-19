@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.rjdeleon.manobodictionary.data.DictionaryDatabase
 import com.rjdeleon.manobodictionary.data.entities.Entry
+import com.squareup.leakcanary.LeakCanary
 import kotlinx.coroutines.*
 import java.lang.Exception
 import java.nio.charset.StandardCharsets
@@ -18,6 +19,11 @@ class DictionaryApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return
+        }
+        LeakCanary.install(this)
         CoroutineScope(Job() + Dispatchers.Main).launch(Dispatchers.IO) {
             seedData()
         }
