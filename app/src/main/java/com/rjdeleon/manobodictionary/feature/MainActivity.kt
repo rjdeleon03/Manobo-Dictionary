@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         setupWithNavController(mainNavigationView, mNavController)
         mainNavigationView.menu.getItem(0).isChecked = true
 
-        mNavController.addOnDestinationChangedListener { ct, dest, _ ->
+        mNavController.addOnDestinationChangedListener { _, dest, _ ->
 
             when(dest.id) {
                 R.id.homeFragment -> {
@@ -51,18 +51,19 @@ class MainActivity : AppCompatActivity() {
                         mainDrawerLayout.openDrawer(GravityCompat.START)
                     }
 
-                    mainSearchView?.restoreSearchView()
+                    mainSearchView?.switchToDefaultState()
                     currentFocus?.clearFocus()
                     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
                 }
                 R.id.entryFragment -> {
-                    mainSearchView?.clearSearchView()
+                    mainSearchView?.switchToEmptyState()
                     toolbar?.setNavigationOnClickListener {
                         onBackPressed()
                     }
                 }
-                else -> {
+                R.id.searchFragment -> {
+                    mainSearchView?.switchToSearchState()
                     toolbar?.setNavigationOnClickListener {
                         onBackPressed()
                     }
@@ -71,8 +72,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         mainSearchView.searchFocusChangeListener = {
-            if (mNavController.currentDestination?.id != R.id.searchFragment)
+            if (mNavController.currentDestination?.id != R.id.searchFragment) {
                 mNavController.navigate(MainNavDirections.actionToSearchFragment())
+            }
         }
 
         mainSearchView.searchTextChangeListener = {query ->
