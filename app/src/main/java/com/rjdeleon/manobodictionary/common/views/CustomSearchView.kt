@@ -205,13 +205,18 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
                 if (searchBarUpdateNeeded) {
                     searchBarUpdateActionIncremental.invoke(interpolatedTime)
                 }
-
-                if (interpolatedTime == 1.0f) {
-                    animationFinishedAction.invoke()
-                }
             }
         }
-        a.duration = 120
+        a.setAnimationListener(object: Animation.AnimationListener {
+            override fun onAnimationRepeat(p0: Animation?) {}
+
+            override fun onAnimationStart(p0: Animation?) {}
+
+            override fun onAnimationEnd(p0: Animation?) {
+                animationFinishedAction.invoke()
+            }
+        })
+        a.duration = 200
         viewToAnimate.startAnimation(a)
     }
 
