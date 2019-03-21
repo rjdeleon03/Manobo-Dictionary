@@ -21,7 +21,8 @@ class EntryFragment : Fragment() {
 
     private val args: EntryFragmentArgs by navArgs()
     private lateinit var mViewModel: EntryViewModel
-    private lateinit var mAdapter: EntryMeaningSetAdapter
+    private lateinit var mMeaningSetAdapter: EntryMeaningSetAdapter
+    private lateinit var mNoteSetAdapter: EntryNoteSetAdapter
 
     companion object {
         /**
@@ -40,7 +41,8 @@ class EntryFragment : Fragment() {
         /* Initialize viewModel and meaning set adapter */
         mViewModel = ViewModelProviders.of(this,
             EntryViewModelFactory(activity!!.application, args.entryId)).get(EntryViewModel::class.java)
-        mAdapter = EntryMeaningSetAdapter(context!!)
+        mMeaningSetAdapter = EntryMeaningSetAdapter(context!!)
+        mNoteSetAdapter = EntryNoteSetAdapter(context!!)
     }
 
     override fun onCreateView(
@@ -53,7 +55,8 @@ class EntryFragment : Fragment() {
         /* Set viewModel, lifecycle owner, and adapter */
         binding.viewModel = mViewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.entryDefinitionRecyclerView.adapter = mAdapter
+        binding.entryDefinitionRecyclerView.adapter = mMeaningSetAdapter
+        binding.entryNoteRecyclerView.adapter = mNoteSetAdapter
 
         return binding.root
     }

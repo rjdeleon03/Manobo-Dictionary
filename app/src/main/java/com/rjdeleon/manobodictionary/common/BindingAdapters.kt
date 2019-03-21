@@ -6,8 +6,10 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.rjdeleon.manobodictionary.data.entities.Entry
 import com.rjdeleon.manobodictionary.data.entities.MeaningSet
+import com.rjdeleon.manobodictionary.data.entities.NoteSet
 import com.rjdeleon.manobodictionary.data.entities.SearchResult
 import com.rjdeleon.manobodictionary.feature.entry.EntryMeaningSetAdapter
+import com.rjdeleon.manobodictionary.feature.entry.EntryNoteSetAdapter
 import com.rjdeleon.manobodictionary.feature.entrylist.EntryListAdapter
 import com.rjdeleon.manobodictionary.feature.search.SearchResultAdapter
 
@@ -18,6 +20,15 @@ fun setWordBasedVisibility(v: View, e: Entry?) {
 //        v.visibility = View.VISIBLE
 //        return
 //    }
+    v.visibility = View.GONE
+}
+
+@BindingAdapter("noteBasedVisibility")
+fun setNoteBasedVisibility(v: View, ns: List<NoteSet>?) {
+    if (!ns.isNullOrEmpty()) {
+        v.visibility = View.VISIBLE
+        return
+    }
     v.visibility = View.GONE
 }
 
@@ -57,6 +68,16 @@ fun setMeaningSets(rv: RecyclerView, ms: List<MeaningSet>?) {
     val adapter = rv.adapter
     if (adapter is EntryMeaningSetAdapter) {
         adapter.setMeaningSets(ms)
+    }
+}
+
+@BindingAdapter("noteSets")
+fun setNoteSets(rv: RecyclerView, ns: List<NoteSet>?) {
+    if (ns.isNullOrEmpty()) return
+
+    val adapter = rv.adapter
+    if (adapter is EntryNoteSetAdapter) {
+        adapter.setNoteSets(ns)
     }
 }
 
