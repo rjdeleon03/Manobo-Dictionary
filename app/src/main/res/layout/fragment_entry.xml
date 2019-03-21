@@ -51,6 +51,8 @@
                 android:orientation="vertical"
                 android:background="@drawable/shape_rounded_top_right">
 
+                <!--
+
                 <LinearLayout
                     android:id="@+id/entryNoteGroup"
                     android:layout_width="match_parent"
@@ -82,6 +84,8 @@
                         hidingText="@{viewModel.entry.relatedWord}" />
 
                 </LinearLayout>
+
+                -->
 
                 <LinearLayout
                     android:id="@+id/entryDefinitionGroup"

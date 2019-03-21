@@ -29,7 +29,8 @@ class DictionaryApplication: Application() {
         val db = DictionaryDatabase
             .getDatabase(this.applicationContext)
 
-        if(db.entryDao().getCount() > 0) return
+        val count = db.entryDao().getCount()
+        if(count > 0) return
 
         val gson = GsonBuilder().create()
         try {
@@ -51,12 +52,25 @@ class DictionaryApplication: Application() {
                 entry.id = i + 1
                 db.entryDao().insert(entry)
 
-                if (entry.meaningSets.isNullOrEmpty()) continue
-                for(meaningSet in entry.meaningSets!!) {
-                    if (!meaningSet.meaning.isBlank()
-                        || !meaningSet.partOfSpeech.isBlank()) {
-                        meaningSet.entryId = entry.id
-                        db.meaningSetDao().insert(meaningSet)
+                if (!entry.meaningSets.isNullOrEmpty()) {
+                    for (meaningSet in entry.meaningSets!!) {
+                        if (!meaningSet.meaning.isBlank()
+                            || !meaningSet.partOfSpeech.isBlank()
+                        ) {
+                            meaningSet.entryId = entry.id
+                            db.meaningSetDao().insert(meaningSet)
+                        }
+                    }
+                }
+
+                if (!entry.noteSets.isNullOrEmpty()) {
+                    for (noteSet in entry.noteSets!!) {
+                        if (!noteSet.noteHeader.isBlank()
+                            || !noteSet.note.isBlank()
+                        ) {
+                            noteSet.entryId = entry.id
+                            db.noteSetDao().insert(noteSet)
+                        }
                     }
                 }
             }

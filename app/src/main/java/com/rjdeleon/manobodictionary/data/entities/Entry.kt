@@ -14,12 +14,10 @@ data class Entry (@PrimaryKey(autoGenerate = false)
                   @ColumnInfo(name = "word")
                   var word: String = "",
 
-                  @ColumnInfo(name = "note")
-                  var note: String = "",
-
-                  @ColumnInfo(name = "related_word")
-                  var relatedWord: String = "",
-
                   @Ignore
                   @SerializedName("meaningSet")
-                  var meaningSets: List<MeaningSet>? = null)
+                  var meaningSets: List<MeaningSet>? = null,
+
+                  @Ignore
+                  @SerializedName("noteSet")
+                  var noteSets: List<NoteSet>? = null)

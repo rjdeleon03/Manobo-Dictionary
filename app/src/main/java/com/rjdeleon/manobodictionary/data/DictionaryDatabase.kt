@@ -6,10 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.rjdeleon.manobodictionary.data.dao.EntryDao
 import com.rjdeleon.manobodictionary.data.dao.MeaningSetDao
+import com.rjdeleon.manobodictionary.data.dao.NoteSetDao
 import com.rjdeleon.manobodictionary.data.entities.Entry
 import com.rjdeleon.manobodictionary.data.entities.MeaningSet
+import com.rjdeleon.manobodictionary.data.entities.NoteSet
 
-@Database(entities = [Entry::class, MeaningSet::class],
+@Database(entities = [Entry::class, MeaningSet::class, NoteSet::class],
     version = 1,
     exportSchema = false)
 abstract class DictionaryDatabase : RoomDatabase() {
@@ -17,6 +19,8 @@ abstract class DictionaryDatabase : RoomDatabase() {
     abstract fun entryDao(): EntryDao
 
     abstract fun meaningSetDao(): MeaningSetDao
+
+    abstract fun noteSetDao(): NoteSetDao
 
     companion object {
 

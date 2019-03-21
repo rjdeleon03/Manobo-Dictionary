@@ -14,10 +14,10 @@ import com.rjdeleon.manobodictionary.feature.search.SearchResultAdapter
 @BindingAdapter("wordBasedVisibility")
 fun setWordBasedVisibility(v: View, e: Entry?) {
     if (e == null) return
-    if (!e.relatedWord.isEmpty() || !e.note.isEmpty()) {
-        v.visibility = View.VISIBLE
-        return
-    }
+//    if (!e.relatedWord.isEmpty() || !e.note.isEmpty()) {
+//        v.visibility = View.VISIBLE
+//        return
+//    }
     v.visibility = View.GONE
 }
 
