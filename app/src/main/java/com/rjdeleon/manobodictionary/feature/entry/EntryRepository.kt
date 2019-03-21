@@ -9,8 +9,11 @@ class EntryRepository (application: Application,
     private val mDatabase = DictionaryDatabase.getDatabase(application.applicationContext)
     private val mEntry = mDatabase.entryDao().getById(entryId)
     private val mMeaningSets = mDatabase.meaningSetDao().getByEntryId(entryId)
+    private val mNoteSets = mDatabase.noteSetDao().getByEntryId(entryId)
 
     fun getEntry() = mEntry
 
     fun getMeaningSets() = mMeaningSets
+
+    fun getNoteSets() = mNoteSets
 }

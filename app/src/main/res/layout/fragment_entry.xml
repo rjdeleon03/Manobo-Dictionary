@@ -49,45 +49,15 @@
                 android:layout_height="match_parent"
                 android:padding="16dp"
                 android:orientation="vertical"
+                android:weightSum="2"
                 android:background="@drawable/shape_rounded_top_right">
-
-                <LinearLayout
-                    android:id="@+id/entryNoteGroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:orientation="vertical"
-                    wordBasedVisibility="@{viewModel.entry}">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/entry_notes"
-                        style="@style/TitleTextViewTheme" />
-
-                    <TextView
-                        android:id="@+id/entryNoteText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        hidingText="@{viewModel.entry.note}"/>
-
-                    <TextView
-                        android:id="@+id/entryRelatedWordText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        hidingText="@{viewModel.entry.relatedWord}" />
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/entryDefinitionGroup"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_marginBottom="16dp"
                     defnBasedVisibility="@{viewModel.meaningSets}">
 
                     <TextView
@@ -102,6 +72,29 @@
                         android:layout_height="match_parent"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         meaningSets="@{viewModel.meaningSets}"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/entryNoteGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    android:layout_weight="2"
+                    noteBasedVisibility="@{viewModel.noteSets}">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/entry_notes"
+                        style="@style/TitleTextViewTheme" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/entryNoteRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        noteSets="@{viewModel.noteSets}"/>
 
                 </LinearLayout>
 
