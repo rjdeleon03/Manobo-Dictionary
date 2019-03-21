@@ -52,9 +52,9 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     mainSearchView?.switchToDefaultState()
-                    currentFocus?.clearFocus()
                     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+                    currentFocus?.clearFocus()
                 }
                 R.id.entryFragment -> {
                     mainSearchView?.switchToEmptyState()

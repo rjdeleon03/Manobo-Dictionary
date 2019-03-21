@@ -76,6 +76,7 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
         val marginUpdateNeeded = currCardMargin == 0 && currCardRadius.isAlmostZero()
         val searchBarUpdateActionImmediate: () -> Unit = {
             setSearchBarState(true)
+            cardView.radius = mCardRadius!!
         }
 
         val searchBarUpdateActionIncremental: (Float) -> Unit = { interpolatedTime ->
@@ -84,8 +85,6 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
 
         val marginUpdateAction: (Float) -> Unit = { interpolatedTime ->
             val margin = (mCardMargin!! * interpolatedTime).toInt()
-            val radius = mCardRadius!! * interpolatedTime
-            cardView.radius = radius
             mCardLayoutParams.setMargins(margin, margin, margin, margin)
             cardView.layoutParams = mCardLayoutParams
         }
@@ -118,14 +117,13 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
 
         val marginUpdateAction: (Float) -> Unit = { interpolatedTime ->
             val margin = (currCardMargin - currCardMargin * interpolatedTime).toInt()
-            val radius = currCardRadius - currCardRadius * interpolatedTime
-            cardView.radius = radius
             mCardLayoutParams.setMargins(margin, margin, margin, margin)
             cardView.layoutParams = mCardLayoutParams
         }
 
         val animationFinishedAction: () -> Unit = {
             searchView.visibility = View.VISIBLE
+            cardView.radius = 0f
         }
 
         performToolbarAnimations(cardView,
@@ -153,14 +151,13 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
 
         val marginUpdateAction: (Float) -> Unit = { interpolatedTime ->
             val margin = (mCardMargin!! - mCardMargin!! * interpolatedTime).toInt()
-            val radius = mCardRadius!! - mCardRadius!! * interpolatedTime
-            cardView.radius = radius
             mCardLayoutParams.setMargins(margin, margin, margin, margin)
             cardView.layoutParams = mCardLayoutParams
         }
 
         val animationFinishedAction: () -> Unit = {
             searchView.visibility = View.GONE
+            cardView.radius = 0f
         }
 
         performToolbarAnimations(cardView,
@@ -208,13 +205,18 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
                 if (searchBarUpdateNeeded) {
                     searchBarUpdateActionIncremental.invoke(interpolatedTime)
                 }
-
-                if ((1f - interpolatedTime).isAlmostZero()) {
-                    animationFinishedAction.invoke()
-                }
             }
         }
-        a.duration = 120
+        a.setAnimationListener(object: Animation.AnimationListener {
+            override fun onAnimationRepeat(p0: Animation?) {}
+
+            override fun onAnimationStart(p0: Animation?) {}
+
+            override fun onAnimationEnd(p0: Animation?) {
+                animationFinishedAction.invoke()
+            }
+        })
+        a.duration = 200
         viewToAnimate.startAnimation(a)
     }
 
