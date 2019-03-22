@@ -1,4 +1,4 @@
-package com.rjdeleon.manobodictionary.feature
+package com.rjdeleon.manobodictionary.feature.main
 
 import android.content.Context
 import android.os.Bundle
