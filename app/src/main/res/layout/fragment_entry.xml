@@ -26,16 +26,17 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="220dp">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/entryWordText"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="180dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginBottom="?attr/actionBarSize"
                     android:textColor="@android:color/white"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
                     android:fontFamily="@font/kaushanscript"
