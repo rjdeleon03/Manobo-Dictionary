@@ -3,15 +3,18 @@ package com.rjdeleon.manobodictionary.feature.splash
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.rjdeleon.manobodictionary.R
+import com.rjdeleon.manobodictionary.common.observeOnce
 import com.rjdeleon.manobodictionary.feature.main.MainActivity
 
 class SplashActivity : AppCompatActivity() {
 
     private lateinit var mViewModel: SplashViewModel
-    private var mTotalEntryCount: Int? = null
+    private val mTotalEntryCount = 5630
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,20 +22,33 @@ class SplashActivity : AppCompatActivity() {
 
         mViewModel = ViewModelProviders.of(this).get(SplashViewModel::class.java)
 
-        mViewModel.getTotalEntryCount().observe(this, Observer<Int> {
-            System.out.println("Total count: $it")
-            mTotalEntryCount = it
-        })
+        val onInitializationComplete:(Boolean) -> Unit = {
+            if (it) {
+                startMainActivity()
+            } else {
+                // TODO: Display error message
+            }
+        }
 
-        mViewModel.getLiveEntryCount().observe(this, Observer<Int> {
-            System.out.println("So far count: $it")
-            if (mTotalEntryCount != null && mTotalEntryCount == it) {
-                val mainActivityIntent = Intent(this, MainActivity::class.java)
-                startActivity(mainActivityIntent)
-                finish()
+        mViewModel.getLiveEntryCount().observe(this, object: Observer<Int> {
+            override fun onChanged(it: Int?) {
+
+                System.out.println("$it / $mTotalEntryCount added!")
+
+                if (it == mTotalEntryCount) {
+                    startMainActivity()
+                    mViewModel.getLiveEntryCount().removeObserver(this)
+                } else {
+                    mViewModel.initializeEntries(onInitializationComplete)
+                }
             }
         })
 
-        mViewModel.initializeEntries()
+    }
+
+    private fun startMainActivity() {
+        val mainActivityIntent = Intent(this, MainActivity::class.java)
+        startActivity(mainActivityIntent)
+        finish()
     }
 }

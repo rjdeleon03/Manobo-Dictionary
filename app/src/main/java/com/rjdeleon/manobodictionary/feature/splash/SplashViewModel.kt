@@ -9,8 +9,7 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
 
     fun getLiveEntryCount() = mRepository.getLiveEntryCount()
 
-    fun getTotalEntryCount() = mRepository.getTotalEntryCount()
-
-    fun initializeEntries() = mRepository.initializeEntries()
+    fun initializeEntries(completionAction: (Boolean) -> Unit) =
+        mRepository.initializeEntries(completionAction)
 
 }

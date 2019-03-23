@@ -3,6 +3,7 @@ package com.rjdeleon.manobodictionary.data.dao
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.rjdeleon.manobodictionary.data.entities.Entry
 
@@ -12,9 +13,6 @@ interface EntryDao {
 
     @Query("SELECT * FROM entry ORDER BY word")
     fun getAllEntries(): LiveData<List<Entry>>
-
-    @Query("SELECT count(*) FROM entry")
-    fun getCount(): Int
 
     @Query("SELECT count(*) FROM entry")
     fun getLiveCount(): LiveData<Int>
@@ -27,6 +25,9 @@ interface EntryDao {
     @Query("SELECT * FROM entry WHERE id = :id")
     fun getById(id: Int): LiveData<Entry>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(entry: Entry)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAllEntries(entries: List<Entry>)
 }

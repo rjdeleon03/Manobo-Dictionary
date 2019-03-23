@@ -16,36 +16,27 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.nio.charset.Charset
 
+@Suppress("SpellCheckingInspection")
 class SplashRepository(application: Application) {
 
     private val mContext = application.applicationContext
     private val mDatabase = DictionaryDatabase.getDatabase(mContext)
-    private val mLiveEntryCount = mDatabase.entryDao().getLiveCount()
-    private val mTotalEntryCount: MutableLiveData<Int> = MutableLiveData()
 
-    fun getLiveEntryCount(): LiveData<Int> = mLiveEntryCount
+    fun getLiveEntryCount(): LiveData<Int> = mDatabase.entryDao().getLiveCount()
 
-    fun getTotalEntryCount(): LiveData<Int> = mTotalEntryCount
-
-    fun initializeEntries() {
+    fun initializeEntries(completionAction: (Boolean) -> Unit) {
         CoroutineScope(Job() + Dispatchers.Main).launch(Dispatchers.IO) {
-            seedData()
+            seedData(completionAction)
         }
     }
 
     @WorkerThread
-    private fun seedData() {
+    private fun seedData(completionAction: (Boolean) -> Unit) {
 
-        val count = mDatabase.entryDao().getCount()
-        if(count >= 5630) {
-            mTotalEntryCount.postValue(count)
-            return
-        }
-
-        val gson = GsonBuilder().create()
         try {
 
             /* Read JSON data from file */
+            val gson = GsonBuilder().create()
             val inputStream = mContext.assets.open(Constants.SEED_FOLDER + Constants.SEED_FILENAME)
             val size = inputStream.available()
             val buffer = ByteArray(size)
@@ -56,38 +47,30 @@ class SplashRepository(application: Application) {
 
             val listType = object: TypeToken<ArrayList<Entry>>(){}.type
             val entries = gson.fromJson<ArrayList<Entry>>(dictJson, listType)
-            mTotalEntryCount.postValue(entries.size)
 
+            mDatabase.entryDao().insertAllEntries(entries)
             for(i in 0 .. (entries.size - 1)) {
                 val entry = entries[i]
-                entry.id = i + 1
-                mDatabase.entryDao().insert(entry)
 
                 if (!entry.meaningSets.isNullOrEmpty()) {
                     for (meaningSet in entry.meaningSets!!) {
-                        if (!meaningSet.meaning.isBlank()
-                            || !meaningSet.partOfSpeech.isBlank()
-                        ) {
-                            meaningSet.entryId = entry.id
-                            mDatabase.meaningSetDao().insert(meaningSet)
-                        }
+                        meaningSet.entryId = entry.id
                     }
+                    mDatabase.meaningSetDao().insertAllMeaningSets(entry.meaningSets!!)
                 }
 
                 if (!entry.noteSets.isNullOrEmpty()) {
                     for (noteSet in entry.noteSets!!) {
-                        if (!noteSet.noteHeader.isBlank()
-                            || !noteSet.note.isBlank()
-                        ) {
-                            noteSet.entryId = entry.id
-                            mDatabase.noteSetDao().insert(noteSet)
-                        }
+                        noteSet.entryId = entry.id
                     }
+                    mDatabase.noteSetDao().insertAllNotes(entry.noteSets!!)
                 }
             }
+            completionAction.invoke(true)
 
         } catch (ex: Exception) {
             ex.printStackTrace()
+            completionAction.invoke(false)
         }
     }
 }
