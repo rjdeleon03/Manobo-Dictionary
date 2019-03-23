@@ -26,9 +26,9 @@ class SplashActivity : AppCompatActivity() {
 
         /* Initialize progress views */
         splashProgressBar.max = mTotalEntryCount
-        splashProgressText.text = "Added 0 / $mTotalEntryCount entries."
+        splashProgressText.text = String.format(getString(R.string.splash_progress), 0, mTotalEntryCount)
 
-
+        /* Create initialization action */
         val onInitializationComplete:(Boolean) -> Unit = {
             if (it) {
                 startMainActivity()
@@ -37,15 +37,17 @@ class SplashActivity : AppCompatActivity() {
             }
         }
 
+        /* Observe initialization progress */
         mViewModel.getInitializationProgress().observe(this, Observer {
             System.out.println("$it / $mTotalEntryCount")
             if (it == 0) {
                 splashProgressLayout.visibility = View.VISIBLE
             }
             splashProgressBar.progress = it
-            splashProgressText.text =  "Added $it / $mTotalEntryCount entries."
+            splashProgressText.text =  String.format(getString(R.string.splash_progress), it, mTotalEntryCount)
         })
 
+        /* Observe live entry count */
         mViewModel.getLiveEntryCount().observeOnce(this, object: Observer<Int> {
             override fun onChanged(it: Int?) {
                 if (it == mTotalEntryCount) {
