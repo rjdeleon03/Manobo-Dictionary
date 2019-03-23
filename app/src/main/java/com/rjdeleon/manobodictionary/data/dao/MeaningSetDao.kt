@@ -25,4 +25,7 @@ interface MeaningSetDao {
 
     @Insert
     fun insert(meaningSet: MeaningSet)
+
+    @Insert
+    fun insertAllMeaningSets(meaningSets: List<MeaningSet>)
 }
