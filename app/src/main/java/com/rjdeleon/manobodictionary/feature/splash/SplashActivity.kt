@@ -3,6 +3,7 @@ package com.rjdeleon.manobodictionary.feature.splash
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.rjdeleon.manobodictionary.R
 import com.rjdeleon.manobodictionary.common.observeOnce
 import com.rjdeleon.manobodictionary.feature.main.MainActivity
+import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : AppCompatActivity() {
 
@@ -22,9 +24,9 @@ class SplashActivity : AppCompatActivity() {
 
         mViewModel = ViewModelProviders.of(this).get(SplashViewModel::class.java)
 
-        val onInitializationProgress:(Int) -> Unit = {
-            System.out.println("$it / $mTotalEntryCount")
-        }
+        /* Initialize progress views */
+        splashProgressBar.max = mTotalEntryCount
+        splashProgressText.text = "Added 0 / $mTotalEntryCount entries."
 
 
         val onInitializationComplete:(Boolean) -> Unit = {
@@ -35,20 +37,25 @@ class SplashActivity : AppCompatActivity() {
             }
         }
 
+        mViewModel.getInitializationProgress().observe(this, Observer {
+            System.out.println("$it / $mTotalEntryCount")
+            if (it == 0) {
+                splashProgressLayout.visibility = View.VISIBLE
+            }
+            splashProgressBar.progress = it
+            splashProgressText.text =  "Added $it / $mTotalEntryCount entries."
+        })
+
         mViewModel.getLiveEntryCount().observeOnce(this, object: Observer<Int> {
             override fun onChanged(it: Int?) {
-
-                System.out.println("$it / $mTotalEntryCount added!")
-
                 if (it == mTotalEntryCount) {
                     onInitializationComplete.invoke(true)
                     mViewModel.getLiveEntryCount().removeObserver(this)
                 } else {
-                    mViewModel.initializeEntries(onInitializationProgress, onInitializationComplete)
+                    mViewModel.initializeEntries(onInitializationComplete)
                 }
             }
         })
-
     }
 
     private fun startMainActivity() {

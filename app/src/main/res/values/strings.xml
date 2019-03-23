@@ -9,4 +9,5 @@
     <string name="menu_home">Home</string>
     <string name="menu_sil">SIL Philippines</string>
     <string name="menu_sos">Save Our Schools</string>
+    <string name="splash_setup">Setting up the dictionary...</string>
 </resources>

@@ -16,8 +16,8 @@ data class Entry (@PrimaryKey(autoGenerate = false)
 
                   @Ignore
                   @SerializedName("meaningSet")
-                  var meaningSets: List<MeaningSet>? = null,
+                  var meaningSets: ArrayList<MeaningSet>? = null,
 
                   @Ignore
                   @SerializedName("noteSet")
-                  var noteSets: List<NoteSet>? = null)
+                  var noteSets: ArrayList<NoteSet>? = null)

@@ -11,7 +11,4 @@ import java.lang.Exception
 import java.nio.charset.StandardCharsets
 
 class DictionaryApplication: Application() {
-
-    private val SEED_FILENAME = "manobo_dict.json"
-    private val SEED_FOLDER = "json/"
 }

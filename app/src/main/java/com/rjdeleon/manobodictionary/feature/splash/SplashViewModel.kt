@@ -9,8 +9,9 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
 
     fun getLiveEntryCount() = mRepository.getLiveEntryCount()
 
-    fun initializeEntries(progressAction: (Int) -> Unit,
-                          completionAction: (Boolean) -> Unit) =
-        mRepository.initializeEntries(progressAction, completionAction)
+    fun getInitializationProgress() = mRepository.getInitializationProgress()
+
+    fun initializeEntries(completionAction: (Boolean) -> Unit) =
+        mRepository.initializeEntries(completionAction)
 
 }

@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.rjdeleon.manobodictionary.data.DictionaryDatabase
 import com.rjdeleon.manobodictionary.data.entities.Entry
+import com.rjdeleon.manobodictionary.data.entities.MeaningSet
 import com.rjdeleon.manobodictionary.feature.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,21 +22,23 @@ class SplashRepository(application: Application) {
 
     private val mContext = application.applicationContext
     private val mDatabase = DictionaryDatabase.getDatabase(mContext)
+    private val mInitializationProgress: MutableLiveData<Int> = MutableLiveData()
 
-    fun getLiveEntryCount(): LiveData<Int> = mDatabase.entryDao().getLiveCount()
+    fun getLiveEntryCount() = mDatabase.entryDao().getLiveCount()
 
-    fun initializeEntries(progressAction: (Int) -> Unit,
-                          completionAction: (Boolean) -> Unit) {
+    fun getInitializationProgress(): LiveData<Int> = mInitializationProgress
+
+    fun initializeEntries(completionAction: (Boolean) -> Unit) {
         CoroutineScope(Job() + Dispatchers.Main).launch(Dispatchers.IO) {
-            seedData(progressAction, completionAction)
+            seedData(completionAction)
         }
     }
 
     @WorkerThread
-    private fun seedData(progressAction: (Int) -> Unit,
-                         completionAction: (Boolean) -> Unit) {
+    private fun seedData(completionAction: (Boolean) -> Unit) {
 
         try {
+            mInitializationProgress.postValue(0)
 
             /* Read JSON data from file */
             val gson = GsonBuilder().create()
@@ -56,6 +59,11 @@ class SplashRepository(application: Application) {
 
                 if (!entry.meaningSets.isNullOrEmpty()) {
                     for (meaningSet in entry.meaningSets!!) {
+                        if (meaningSet.meaning.isBlank()
+                            || meaningSet.partOfSpeech.isBlank()) {
+                            entry.meaningSets?.remove(meaningSet)
+                            continue
+                        }
                         meaningSet.entryId = entry.id
                     }
                     mDatabase.meaningSetDao().insertAllMeaningSets(entry.meaningSets!!)
@@ -63,11 +71,16 @@ class SplashRepository(application: Application) {
 
                 if (!entry.noteSets.isNullOrEmpty()) {
                     for (noteSet in entry.noteSets!!) {
+                        if (noteSet.noteHeader.isBlank()
+                            || noteSet.noteHeader.isBlank()) {
+                            entry.noteSets?.remove(noteSet)
+                            continue
+                        }
                         noteSet.entryId = entry.id
                     }
                     mDatabase.noteSetDao().insertAllNotes(entry.noteSets!!)
                 }
-                progressAction.invoke(i + 1)
+                mInitializationProgress.postValue(i + 1)
             }
             completionAction.invoke(true)
 
