@@ -24,14 +24,16 @@ class SplashRepository(application: Application) {
 
     fun getLiveEntryCount(): LiveData<Int> = mDatabase.entryDao().getLiveCount()
 
-    fun initializeEntries(completionAction: (Boolean) -> Unit) {
+    fun initializeEntries(progressAction: (Int) -> Unit,
+                          completionAction: (Boolean) -> Unit) {
         CoroutineScope(Job() + Dispatchers.Main).launch(Dispatchers.IO) {
-            seedData(completionAction)
+            seedData(progressAction, completionAction)
         }
     }
 
     @WorkerThread
-    private fun seedData(completionAction: (Boolean) -> Unit) {
+    private fun seedData(progressAction: (Int) -> Unit,
+                         completionAction: (Boolean) -> Unit) {
 
         try {
 
@@ -65,6 +67,7 @@ class SplashRepository(application: Application) {
                     }
                     mDatabase.noteSetDao().insertAllNotes(entry.noteSets!!)
                 }
+                progressAction.invoke(i + 1)
             }
             completionAction.invoke(true)
 

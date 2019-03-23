@@ -22,6 +22,11 @@ class SplashActivity : AppCompatActivity() {
 
         mViewModel = ViewModelProviders.of(this).get(SplashViewModel::class.java)
 
+        val onInitializationProgress:(Int) -> Unit = {
+            System.out.println("$it / $mTotalEntryCount")
+        }
+
+
         val onInitializationComplete:(Boolean) -> Unit = {
             if (it) {
                 startMainActivity()
@@ -30,16 +35,16 @@ class SplashActivity : AppCompatActivity() {
             }
         }
 
-        mViewModel.getLiveEntryCount().observe(this, object: Observer<Int> {
+        mViewModel.getLiveEntryCount().observeOnce(this, object: Observer<Int> {
             override fun onChanged(it: Int?) {
 
                 System.out.println("$it / $mTotalEntryCount added!")
 
                 if (it == mTotalEntryCount) {
-                    startMainActivity()
+                    onInitializationComplete.invoke(true)
                     mViewModel.getLiveEntryCount().removeObserver(this)
                 } else {
-                    mViewModel.initializeEntries(onInitializationComplete)
+                    mViewModel.initializeEntries(onInitializationProgress, onInitializationComplete)
                 }
             }
         })
