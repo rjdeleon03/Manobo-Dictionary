@@ -13,13 +13,14 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/tab_gradient"
+        app:elevation="0dp">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/homeTabLayout"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
             app:tabSelectedTextColor="@android:color/white"
             app:tabTextColor="@color/textColorLightGray"
             app:tabTextAppearance="@style/TabTextAppearance"
