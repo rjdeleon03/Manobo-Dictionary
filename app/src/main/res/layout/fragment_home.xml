@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    android:background="@color/colorPrimary"
+    android:background="@android:color/transparent"
     tools:context=".feature.home.HomeFragment">
 
     <com.google.android.material.tabs.TabLayout

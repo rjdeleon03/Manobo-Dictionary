@@ -178,7 +178,7 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
         } else {
             toolbar?.navigationIcon
                 ?.setColorFilter(ContextCompat.getColor(context!!, android.R.color.white), PorterDuff.Mode.SRC_ATOP)
-            cardView.setCardBackgroundColor(getColor(R.color.colorPrimary))
+            cardView.setCardBackgroundColor(getColor(android.R.color.transparent))
             cardView.cardElevation = 0f
         }
     }
