@@ -1,6 +1,8 @@
 package com.rjdeleon.manobodictionary.feature.main
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
@@ -45,6 +47,18 @@ class MainActivity : AppCompatActivity() {
         setupWithNavController(mainNavigationView, mNavController)
         mainNavigationView.menu.getItem(0).isChecked = true
 
+        mainNavigationView.setNavigationItemSelectedListener {
+            if (!it.isChecked) {
+                when (it.itemId) {
+                    R.id.menuHome -> it.isChecked = true
+                    R.id.menuSil -> openUrlInBrowser("https://philippines.sil.org/resources/online_resources/msm")
+                    R.id.menuSos -> openUrlInBrowser("https://saveourschoolsnetwork.wordpress.com/")
+                }
+            }
+            mainDrawerLayout.closeDrawers()
+            true
+        }
+
         mNavController.addOnDestinationChangedListener { _, dest, _ ->
 
             when(dest.id) {
@@ -84,13 +98,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        when(mNavController.currentDestination?.id) {
-            R.id.homeFragment -> {
-            }
-            else -> {
-            }
-        }
-        super.onBackPressed()
+    private fun openUrlInBrowser(url: String) {
+        val i = Intent(Intent.ACTION_VIEW)
+        i.data = Uri.parse(url)
+        startActivity(i)
     }
 }
