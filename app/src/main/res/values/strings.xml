@@ -8,7 +8,7 @@
     <string name="search_label">Search dictionary</string>
     <string name="menu_home">Home</string>
     <string name="menu_sil">SIL Philippines</string>
-    <string name="menu_sos">Save Our Schools</string>
+    <string name="menu_sos">Save Our Schools Network</string>
     <string name="splash_setup">Setting up the dictionary…</string>
     <string name="splash_progress">Added %1$d / %2$d entries.</string>
 </resources>
