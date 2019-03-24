@@ -1,6 +1,7 @@
 package com.rjdeleon.manobodictionary.common.views
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.util.AttributeSet
 import android.view.View
@@ -76,6 +77,7 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
         val marginUpdateNeeded = currCardMargin == 0 && currCardRadius.isAlmostZero()
         val searchBarUpdateActionImmediate: () -> Unit = {
             setSearchBarState(true)
+            viewLayout.setBackgroundColor(Color.TRANSPARENT)
             cardView.radius = mCardRadius!!
         }
 
@@ -124,6 +126,7 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
         val animationFinishedAction: () -> Unit = {
             searchView.visibility = View.VISIBLE
             cardView.radius = 0f
+            viewLayout.setBackgroundColor(Color.WHITE)
         }
 
         performToolbarAnimations(cardView,
@@ -143,6 +146,8 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
 
         val searchBarUpdateActionImmediate: () -> Unit = {
             setSearchBarState(false)
+            viewLayout.setBackgroundColor(Color.TRANSPARENT)
+            cardView.background.alpha = 0
         }
 
         val searchBarUpdateActionIncremental: (Float) -> Unit = { interpolatedTime ->
@@ -173,13 +178,12 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
         if (isDefault) {
             toolbar?.navigationIcon
                 ?.setColorFilter(getColor(android.R.color.black), PorterDuff.Mode.SRC_ATOP)
-            cardView.setCardBackgroundColor(getColor(android.R.color.white))
+            cardView.setCardBackgroundColor(Color.WHITE)
             cardView.cardElevation = mCardElevation!!
         } else {
             toolbar?.navigationIcon
                 ?.setColorFilter(ContextCompat.getColor(context!!, android.R.color.white), PorterDuff.Mode.SRC_ATOP)
-            cardView.setCardBackgroundColor(getColor(android.R.color.transparent))
-            cardView.cardElevation = 0f
+            cardView.setCardBackgroundColor(Color.TRANSPARENT)
         }
     }
 
