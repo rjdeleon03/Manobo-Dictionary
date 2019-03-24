@@ -1,8 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Agusan-Manobo Dictionary</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="entry_notes">Notes</string>
     <string name="entry_definition">Definition</string>
     <string name="search_label">Search dictionary</string>
@@ -10,5 +8,8 @@
     <string name="menu_sil">SIL Philippines</string>
     <string name="menu_sos">Save Our Schools Network</string>
     <string name="splash_setup">Setting up the dictionary…</string>
-    <string name="splash_progress">Added %1$d / %2$d entries.</string>
+    <string name="splash_progress"
+        tools:ignore="PluralsCandidate">Added %1$d / %2$d entries.</string>
+    <string name="image_background">Background image</string>
+    <string name="image_logo">Logo</string>
 </resources>

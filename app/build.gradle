@@ -31,10 +31,10 @@ android {
 }
 
 ext {
-    roomVersion = "2.1.0-alpha04"
-    lifecycleVersion = "2.1.0-alpha02"
+    roomVersion = "2.1.0-alpha06"
+    lifecycleVersion = "2.1.0-alpha03"
     coroutineVersion = "1.1.1"
-    navVersion = "2.0.0-rc02"
+    navVersion = "2.1.0-alpha01"
 }
 
 dependencies {
