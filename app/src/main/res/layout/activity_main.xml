@@ -11,31 +11,52 @@
     android:background="@color/colorPrimary"
     tools:context=".feature.main.MainActivity">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <com.rjdeleon.manobodictionary.common.views.CustomSearchView
-            android:id="@+id/mainSearchView"
+        <ScrollView
+            android:id="@+id/mainBackgroundScrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardRadius="2dp"
-            app:searchHint="@string/search_label"/>
+            android:layout_height="match_parent">
 
-        <fragment
-            android:id="@+id/navigationFragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg1"
+                android:scaleType="fitStart"/>
+
+        </ScrollView>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:defaultNavHost="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:navGraph="@navigation/main_nav" />
+            android:orientation="vertical"
+            android:background="@android:color/transparent">
 
-    </LinearLayout>
+            <com.rjdeleon.manobodictionary.common.views.CustomSearchView
+                android:id="@+id/mainSearchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardRadius="2dp"
+                app:searchHint="@string/search_label"/>
+
+            <fragment
+                android:id="@+id/navigationFragment"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:defaultNavHost="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navGraph="@navigation/main_nav" />
+
+        </LinearLayout>
+
+    </FrameLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/mainNavigationView"

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="cardViewPadding">-11dp</dimen>
+    <dimen name="searchCardViewElevation">0dp</dimen>
+    <dimen name="searchCardViewMargin">4dp</dimen>
+</resources>

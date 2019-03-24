@@ -14,11 +14,6 @@
         android:layout_height="match_parent"
         tools:context=".feature.entry.EntryFragment">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@color/colorPrimaryDark" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -26,21 +21,53 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="220dp">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="?attr/actionBarSize">
 
-                <TextView
-                    android:id="@+id/entryWordText"
+                <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardElevation="8dp"
+                    app:cardCornerRadius="0dp"
+                    app:contentPaddingLeft="@dimen/cardViewPadding"
+                    app:contentPaddingRight="@dimen/cardViewPadding"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:textColor="@android:color/white"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                    android:fontFamily="@font/kaushanscript"
-                    android:gravity="center"
-                    android:text="@{viewModel.entry.word}" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="#5d1049"
+                        android:gravity="center">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp"
+                            android:background="#00bfa5"/>
+
+                        <TextView
+                            android:id="@+id/entryWordText"
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                            android:textColor="@android:color/white"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                            android:fontFamily="@font/kaushanscript"
+                            android:gravity="center"
+                            android:text="@{viewModel.entry.word}" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp"
+                            android:background="#00bfa5"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
