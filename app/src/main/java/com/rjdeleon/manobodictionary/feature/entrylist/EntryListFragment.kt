@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 
 import com.rjdeleon.manobodictionary.databinding.FragmentEntryListBinding
 
@@ -65,6 +66,8 @@ class EntryListFragment : Fragment() {
         binding.viewModel = mViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         binding.entryListRecyclerView.adapter = mAdapter
+        binding.entryListRecyclerView
+            .addItemDecoration(DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL))
 
         return binding.root
     }

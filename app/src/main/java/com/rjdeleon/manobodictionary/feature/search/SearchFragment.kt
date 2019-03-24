@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 
 import com.rjdeleon.manobodictionary.databinding.FragmentSearchBinding
 
@@ -40,6 +41,8 @@ class SearchFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = mViewModel
         binding.searchRecyclerView.adapter = mAdapter
+        binding.searchRecyclerView
+            .addItemDecoration(DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL))
 
         return binding.root
     }
