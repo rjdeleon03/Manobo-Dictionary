@@ -12,5 +12,5 @@
         tools:ignore="PluralsCandidate">Added %1$d / %2$d entries.</string>
     <string name="image_background">Background image</string>
     <string name="image_logo">Logo</string>
-    <string name="entrylist_nodata">No entries for this letter can be found.</string>
+    <string name="entry_list_no_data">No entries for this letter can be found.</string>
 </resources>
