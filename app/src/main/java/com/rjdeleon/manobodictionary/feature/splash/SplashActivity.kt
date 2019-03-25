@@ -48,7 +48,7 @@ class SplashActivity : AppCompatActivity() {
         })
 
         /* Observe live entry count */
-        mViewModel.getLiveEntryCount().observeOnce(this, object: Observer<Int> {
+        mViewModel.getLiveEntryCount().observeOnce(object: Observer<Int> {
             override fun onChanged(it: Int?) {
                 if (it == mTotalEntryCount) {
                     onInitializationComplete.invoke(true)

@@ -1,9 +1,12 @@
 package com.rjdeleon.manobodictionary.feature.main
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -27,7 +30,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mainBackgroundScrollView.isEnabled = false
+        mainBackgroundScrollView.setOnTouchListener(object: View.OnTouchListener {
+            @SuppressLint("ClickableViewAccessibility")
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                return true
+            }
+        })
 
         /* Get nav controller */
         mNavController = findNavController(R.id.navigationFragment)
