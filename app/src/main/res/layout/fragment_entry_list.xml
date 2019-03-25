@@ -9,17 +9,26 @@
             type="com.rjdeleon.manobodictionary.feature.entrylist.EntryListViewModel"/>
     </data>
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         tools:context=".feature.entrylist.EntryListFragment">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/entrylist_nodata"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/entryListRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/white"
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             entryList="@{viewModel.entries}"/>
-    </FrameLayout>
+
+    </RelativeLayout>
 </layout>

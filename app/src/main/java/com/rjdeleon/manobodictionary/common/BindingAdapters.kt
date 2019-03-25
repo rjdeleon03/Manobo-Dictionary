@@ -53,10 +53,14 @@ fun setHidingText(tv: TextView, str: String?) {
 
 @BindingAdapter("entryList")
 fun setEntries(rv: RecyclerView, e: List<Entry>?) {
-    if (e.isNullOrEmpty()) return
+    if (e.isNullOrEmpty()) {
+        rv.visibility = View.GONE
+        return
+    }
 
     val adapter = rv.adapter
     if (adapter is EntryListAdapter) {
+        rv.visibility = View.VISIBLE
         adapter.setEntries(e)
     }
 }
