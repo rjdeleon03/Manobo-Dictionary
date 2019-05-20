@@ -19,6 +19,7 @@ interface MeaningSetDao {
     @Query("SELECT entry_id, word, part_of_speech, meaning " +
             "FROM meaning_set JOIN entry ON meaning_set.entry_id = entry.id " +
             "WHERE word LIKE :searchTerm or " +
+            "normalized_word LIKE :searchTerm or " +
             "part_of_speech LIKE :searchTerm or " +
             "meaning LIKE :searchTerm")
     fun getSearchResults(searchTerm: String) : LiveData<List<SearchResult>>

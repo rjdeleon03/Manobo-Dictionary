@@ -14,6 +14,12 @@ data class Entry (@PrimaryKey(autoGenerate = false)
                   @ColumnInfo(name = "word")
                   var word: String = "",
 
+                  @ColumnInfo(name = "normalized_word")
+                  var normalizedWord: String = "",
+
+                  @ColumnInfo(name = "is_saved")
+                  var isSaved: Boolean = false,
+
                   @Ignore
                   @SerializedName("meaningSet")
                   var meaningSets: ArrayList<MeaningSet>? = null,
