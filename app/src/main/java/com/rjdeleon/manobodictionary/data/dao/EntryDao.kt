@@ -18,9 +18,8 @@ interface EntryDao {
     fun getLiveCount(): LiveData<Int>
 
 
-    @Query("SELECT * FROM entry WHERE word LIKE :letterFilter OR word LIKE :letterFilter2 COLLATE NOCASE")
-    fun getByLetter(letterFilter: String,
-                    letterFilter2: String): LiveData<List<Entry>>
+    @Query("SELECT * FROM entry WHERE normalized_word LIKE :letterFilter COLLATE NOCASE")
+    fun getByLetter(letterFilter: String): LiveData<List<Entry>>
 
     @Query("SELECT * FROM entry WHERE id = :id")
     fun getById(id: Int): LiveData<Entry>
