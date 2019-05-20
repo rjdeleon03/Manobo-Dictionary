@@ -14,7 +14,7 @@ interface EntryDao {
     @Query("SELECT * FROM entry ORDER BY word")
     fun getAllEntries(): LiveData<List<Entry>>
 
-    @Query("SELECT count(*) FROM entry")
+    @Query("SELECT (SELECT count(*) FROM entry) + (SELECT count(*) FROM meaning_set) + (SELECT count(*) FROM note_set)")
     fun getLiveCount(): LiveData<Int>
 
 
@@ -24,9 +24,9 @@ interface EntryDao {
     @Query("SELECT * FROM entry WHERE id = :id")
     fun getById(id: Int): LiveData<Entry>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(entry: Entry)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAllEntries(entries: List<Entry>)
 }
