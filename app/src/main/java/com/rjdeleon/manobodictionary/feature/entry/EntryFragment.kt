@@ -2,12 +2,11 @@ package com.rjdeleon.manobodictionary.feature.entry
 
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
+import com.rjdeleon.manobodictionary.R
 
 import com.rjdeleon.manobodictionary.databinding.FragmentEntryBinding
 
@@ -58,6 +57,19 @@ class EntryFragment : Fragment() {
         binding.entryDefinitionRecyclerView.adapter = mMeaningSetAdapter
         binding.entryNoteRecyclerView.adapter = mNoteSetAdapter
 
+        setHasOptionsMenu(true)
+
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.entry_menu, menu)
+
+        val bookmarkButton = menu.findItem(R.id.entryMenuBookmark)
+        bookmarkButton.setOnMenuItemClickListener {
+            mViewModel.bookmarkEntry(true)
+            true
+        }
     }
 }

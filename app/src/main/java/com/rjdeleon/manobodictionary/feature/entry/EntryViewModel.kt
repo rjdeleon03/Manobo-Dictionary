@@ -13,4 +13,6 @@ class EntryViewModel(application: Application,
     fun getMeaningSets() = mRepository.getMeaningSets()
 
     fun getNoteSets() = mRepository.getNoteSets()
+
+    fun bookmarkEntry(willBookmark: Boolean) = mRepository.bookmarkEntry(willBookmark)
 }

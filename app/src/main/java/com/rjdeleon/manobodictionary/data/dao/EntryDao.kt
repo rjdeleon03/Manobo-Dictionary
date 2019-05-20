@@ -1,10 +1,7 @@
 package com.rjdeleon.manobodictionary.data.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.rjdeleon.manobodictionary.data.entities.Entry
 
 @Suppress("SpellCheckingInspection")
@@ -23,6 +20,9 @@ interface EntryDao {
 
     @Query("SELECT * FROM entry WHERE id = :id")
     fun getById(id: Int): LiveData<Entry>
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun update(entry: Entry)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(entry: Entry)

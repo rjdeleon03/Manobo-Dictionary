@@ -2,6 +2,10 @@ package com.rjdeleon.manobodictionary.feature.entry
 
 import android.app.Application
 import com.rjdeleon.manobodictionary.data.DictionaryDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class EntryRepository (application: Application,
                        entryId: Int) {
@@ -16,4 +20,13 @@ class EntryRepository (application: Application,
     fun getMeaningSets() = mMeaningSets
 
     fun getNoteSets() = mNoteSets
+
+    fun bookmarkEntry(willBookmark: Boolean) {
+        val entry = mEntry.value!!
+        entry.isSaved = willBookmark
+
+        CoroutineScope(Job() + Dispatchers.Main).launch (Dispatchers.IO) {
+            mDatabase.entryDao().update(entry)
+        }
+    }
 }

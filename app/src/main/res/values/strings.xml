@@ -13,4 +13,5 @@
     <string name="image_background">Background image</string>
     <string name="image_logo">Logo</string>
     <string name="entry_list_no_data">No entries for this letter can be found.</string>
+    <string name="entry_menu_bookmark">Bookmark</string>
 </resources>
