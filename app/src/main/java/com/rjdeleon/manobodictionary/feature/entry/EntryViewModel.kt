@@ -14,5 +14,5 @@ class EntryViewModel(application: Application,
 
     fun getNoteSets() = mRepository.getNoteSets()
 
-    fun bookmarkEntry(willBookmark: Boolean) = mRepository.bookmarkEntry(willBookmark)
+    fun bookmarkEntry() = mRepository.bookmarkEntry()
 }

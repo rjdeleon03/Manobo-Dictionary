@@ -21,9 +21,9 @@ class EntryRepository (application: Application,
 
     fun getNoteSets() = mNoteSets
 
-    fun bookmarkEntry(willBookmark: Boolean) {
+    fun bookmarkEntry() {
         val entry = mEntry.value!!
-        entry.isSaved = willBookmark
+        entry.isSaved = !entry.isSaved
 
         CoroutineScope(Job() + Dispatchers.Main).launch (Dispatchers.IO) {
             mDatabase.entryDao().update(entry)

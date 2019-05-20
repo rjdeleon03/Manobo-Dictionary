@@ -68,7 +68,7 @@ class EntryFragment : Fragment() {
 
         val bookmarkButton = menu.findItem(R.id.entryMenuBookmark)
         bookmarkButton.setOnMenuItemClickListener {
-            mViewModel.bookmarkEntry(true)
+            mViewModel.bookmarkEntry()
             true
         }
     }
