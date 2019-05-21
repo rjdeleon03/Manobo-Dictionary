@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/homeFragment"
+            android:title="@string/menu_home"/>
 
-    <item android:id="@+id/menuHome"
-        android:title="@string/menu_home"/>
+        <item android:id="@+id/bookmarkedFragment"
+            android:title="@string/menu_bookmarked"/>
 
-    <item android:id="@+id/menuBookmarked"
-        android:title="@string/menu_bookmarked"/>
+        <item android:id="@+id/menuSil"
+            android:title="@string/menu_sil"
+            android:checkable="false"/>
 
-    <item android:id="@+id/menuSil"
-        android:title="@string/menu_sil"/>
-
-    <item android:id="@+id/menuSos"
-        android:title="@string/menu_sos"/>
-
+        <item android:id="@+id/menuSos"
+            android:title="@string/menu_sos"
+            android:checkable="false"/>
+    </group>
 </menu>
