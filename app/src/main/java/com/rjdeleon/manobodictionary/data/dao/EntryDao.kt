@@ -1,11 +1,9 @@
 package com.rjdeleon.manobodictionary.data.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.rjdeleon.manobodictionary.data.entities.Entry
+import com.rjdeleon.manobodictionary.data.entities.EntryWithDetails
 
 @Suppress("SpellCheckingInspection")
 @Dao
@@ -21,8 +19,9 @@ interface EntryDao {
     @Query("SELECT * FROM entry WHERE normalized_word LIKE :letterFilter COLLATE NOCASE")
     fun getByLetter(letterFilter: String): LiveData<List<Entry>>
 
+    @Transaction
     @Query("SELECT * FROM entry WHERE id = :id")
-    fun getById(id: Int): LiveData<Entry>
+    fun getByIdWithDetails(id: Int): LiveData<EntryWithDetails>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(entry: Entry)
