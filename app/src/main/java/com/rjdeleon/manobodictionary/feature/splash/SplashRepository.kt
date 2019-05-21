@@ -8,7 +8,6 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.rjdeleon.manobodictionary.data.DictionaryDatabase
 import com.rjdeleon.manobodictionary.data.entities.Entry
-import com.rjdeleon.manobodictionary.data.entities.MeaningSet
 import com.rjdeleon.manobodictionary.feature.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

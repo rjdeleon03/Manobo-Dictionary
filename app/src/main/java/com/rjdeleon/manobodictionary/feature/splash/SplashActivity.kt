@@ -4,8 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.rjdeleon.manobodictionary.R
@@ -17,6 +16,8 @@ class SplashActivity : AppCompatActivity() {
 
     private lateinit var mViewModel: SplashViewModel
     private val mTotalEntryCount = 5630
+    private val mTotalMeaningSetCount = 5846
+    private val mTotalNoteSetCount = 1709
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +38,10 @@ class SplashActivity : AppCompatActivity() {
             }
         }
 
+        val totalCount = mTotalEntryCount + mTotalMeaningSetCount + mTotalNoteSetCount
+
         /* Observe initialization progress */
         mViewModel.getInitializationProgress().observe(this, Observer {
-            System.out.println("$it / $mTotalEntryCount")
             if (it == 0) {
                 splashProgressLayout.visibility = View.VISIBLE
             }
@@ -50,7 +52,7 @@ class SplashActivity : AppCompatActivity() {
         /* Observe live entry count */
         mViewModel.getLiveEntryCount().observeOnce(object: Observer<Int> {
             override fun onChanged(it: Int?) {
-                if (it == mTotalEntryCount) {
+                if (it == totalCount) {
                     onInitializationComplete.invoke(true)
                     mViewModel.getLiveEntryCount().removeObserver(this)
                 } else {
