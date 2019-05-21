@@ -22,7 +22,7 @@ class EntryRepository (application: Application,
     fun getNoteSets() = mNoteSets
 
     fun bookmarkEntry() {
-        val entry = mEntry.value!!
+        val entry = mEntry.value!!.entry!!
         entry.isSaved = !entry.isSaved
 
         CoroutineScope(Job() + Dispatchers.Main).launch (Dispatchers.IO) {

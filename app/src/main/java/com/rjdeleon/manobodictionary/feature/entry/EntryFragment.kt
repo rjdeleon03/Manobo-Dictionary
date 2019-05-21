@@ -4,6 +4,7 @@ package com.rjdeleon.manobodictionary.feature.entry
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.rjdeleon.manobodictionary.R
@@ -22,6 +23,7 @@ class EntryFragment : Fragment() {
     private lateinit var mViewModel: EntryViewModel
     private lateinit var mMeaningSetAdapter: EntryMeaningSetAdapter
     private lateinit var mNoteSetAdapter: EntryNoteSetAdapter
+    private lateinit var mBookmarkButton: MenuItem
 
     companion object {
         /**
@@ -56,6 +58,17 @@ class EntryFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.entryDefinitionRecyclerView.adapter = mMeaningSetAdapter
         binding.entryNoteRecyclerView.adapter = mNoteSetAdapter
+        mViewModel.getEntry().observe(viewLifecycleOwner, Observer {
+
+            // TODO:
+            // 1. Update button state
+            // 2. Display snackbar
+            if (it.entry!!.isSaved) {
+                mBookmarkButton.setIcon(R.drawable.ic_bookmark_24dp)
+            } else {
+                mBookmarkButton.setIcon(R.drawable.ic_bookmark_border_24dp)
+            }
+        })
 
         setHasOptionsMenu(true)
 
@@ -66,8 +79,8 @@ class EntryFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.entry_menu, menu)
 
-        val bookmarkButton = menu.findItem(R.id.entryMenuBookmark)
-        bookmarkButton.setOnMenuItemClickListener {
+        mBookmarkButton = menu.findItem(R.id.entryMenuBookmark)
+        mBookmarkButton.setOnMenuItemClickListener {
             mViewModel.bookmarkEntry()
             true
         }
