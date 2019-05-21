@@ -15,4 +15,5 @@
     <string name="entry_list_no_data">No entries for this letter can be found.</string>
     <string name="entry_menu_bookmark">Bookmark</string>
     <string name="menu_bookmarked">Bookmarked Entries</string>
+    <string name="bookmarked_no_data">No bookmarked entries can be found.</string>
 </resources>

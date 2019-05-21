@@ -68,5 +68,9 @@
         android:id="@+id/bookmarkedFragment"
         android:name="com.rjdeleon.manobodictionary.feature.bookmarked.BookmarkedFragment"
         android:label="fragment_bookmarked"
-        tools:layout="@layout/fragment_bookmarked" />
+        tools:layout="@layout/fragment_bookmarked" >
+        <action
+            android:id="@+id/action_bookmarkedFragment_to_entryFragment"
+            app:destination="@id/entryFragment" />
+    </fragment>
 </navigation>
