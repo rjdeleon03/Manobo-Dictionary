@@ -7,7 +7,7 @@ class EntryRepository (application: Application,
                        entryId: Int) {
 
     private val mDatabase = DictionaryDatabase.getDatabase(application.applicationContext)
-    private val mEntry = mDatabase.entryDao().getById(entryId)
+    private val mEntry = mDatabase.entryDao().getByIdWithDetails(entryId)
     private val mMeaningSets = mDatabase.meaningSetDao().getByEntryId(entryId)
     private val mNoteSets = mDatabase.noteSetDao().getByEntryId(entryId)
 
