@@ -58,7 +58,14 @@ class MainActivity : AppCompatActivity() {
         mainNavigationView.setNavigationItemSelectedListener {
             if (!it.isChecked) {
                 when (it.itemId) {
-                    R.id.menuHome -> it.isChecked = true
+                    R.id.menuHome -> {
+                        it.isChecked = true
+                        mNavController.navigate(R.id.action_to_homeFragment)
+                    }
+                    R.id.menuBookmarked -> {
+                        it.isChecked = true
+                        mNavController.navigate(R.id.action_to_bookmarkedFragment)
+                    }
                     R.id.menuSil -> openUrlInBrowser("https://philippines.sil.org/resources/online_resources/msm")
                     R.id.menuSos -> openUrlInBrowser("https://saveourschoolsnetwork.wordpress.com/")
                 }
@@ -70,6 +77,7 @@ class MainActivity : AppCompatActivity() {
         mNavController.addOnDestinationChangedListener { _, dest, _ ->
 
             when(dest.id) {
+                R.id.bookmarkedFragment,
                 R.id.homeFragment -> {
                     toolbar?.setNavigationOnClickListener {
                         mainDrawerLayout.openDrawer(GravityCompat.START)

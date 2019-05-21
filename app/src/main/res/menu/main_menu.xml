@@ -4,6 +4,9 @@
     <item android:id="@+id/menuHome"
         android:title="@string/menu_home"/>
 
+    <item android:id="@+id/menuBookmarked"
+        android:title="@string/menu_bookmarked"/>
+
     <item android:id="@+id/menuSil"
         android:title="@string/menu_sil"/>
 
