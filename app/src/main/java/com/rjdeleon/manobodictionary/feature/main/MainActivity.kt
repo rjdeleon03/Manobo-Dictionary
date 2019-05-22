@@ -46,7 +46,8 @@ class MainActivity : AppCompatActivity() {
         val appBarConfig = AppBarConfiguration
             .Builder(setOf(
                 R.id.homeFragment,
-                R.id.bookmarkedFragment))
+                R.id.bookmarkedFragment,
+                R.id.aboutFragment))
             .setDrawerLayout(mainDrawerLayout)
             .build()
 
@@ -68,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         mNavController.addOnDestinationChangedListener { _, dest, _ ->
 
             when(dest.id) {
+                R.id.aboutFragment,
                 R.id.bookmarkedFragment,
                 R.id.homeFragment -> {
                     toolbar?.setNavigationOnClickListener {

@@ -4,7 +4,9 @@
     <string name="entry_notes">Notes</string>
     <string name="entry_definition">Definition</string>
     <string name="search_label">Search dictionary</string>
-    <string name="menu_home">Home</string>
+    <string name="menu_home">All Entries</string>
+    <string name="menu_bookmarked">Bookmarked Entries</string>
+    <string name="menu_about">About</string>
     <string name="menu_sil">SIL Philippines</string>
     <string name="menu_sos">Save Our Schools Network</string>
     <string name="splash_setup">Setting up the dictionary…</string>
@@ -14,8 +16,19 @@
     <string name="image_logo">Logo</string>
     <string name="entry_list_no_data">No entries for this letter can be found.</string>
     <string name="entry_menu_bookmark">Bookmark</string>
-    <string name="menu_bookmarked">Bookmarked Entries</string>
-    <string name="bookmarked_no_data">No bookmarked entries can be found.</string>
     <string name="entry_bookmark_saved">This entry has been bookmarked.</string>
     <string name="entry_bookmark_removed">This entry has been removed from your bookmarks.</string>
+    <string name="bookmarked_no_data">No bookmarked entries can be found.</string>
+    <string name="about_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris egestas nec ante eget ullamcorper. Praesent a tellus tellus. Donec in varius leo, lacinia ultricies velit. Integer convallis lorem in magna viverra iaculis. Donec scelerisque orci enim, at laoreet est euismod eget. Sed fringilla semper nunc ut malesuada. In ac erat metus. Nam sodales, enim id efficitur suscipit, neque lectus dapibus arcu, at imperdiet lectus elit ut purus. Aliquam nec risus id purus semper lobortis quis ac elit. Sed lobortis id lorem et vulputate. Etiam lacus ante, dictum eget pharetra in, tincidunt nec augue. Duis id justo semper, porttitor risus nec, dapibus nunc. Nam eget odio non arcu tristique gravida. Nam aliquam tellus erat, et maximus ipsum elementum ut. Maecenas ac ipsum id dolor varius tempus. Nullam ornare ultrices vehicula.
+        \nAliquam accumsan eros nunc, eu ullamcorper metus posuere sed. Curabitur vitae tortor sit amet risus commodo pellentesque eget at nulla. In mollis libero nisi, ac convallis lacus blandit at. Nunc id ligula eu lectus varius varius. Sed lobortis quis nibh nec semper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer facilisis a nulla ut sagittis. Fusce non felis eleifend, scelerisque eros sit amet, molestie leo.
+        \nAliquam accumsan eros nunc, eu ullamcorper metus posuere sed. Curabitur vitae tortor sit amet risus commodo pellentesque eget at nulla. In mollis libero nisi,
+        \nAliquam accumsan eros nunc, eu ullamcorper metus posuere sed. Curabitur vitae tortor sit amet risus commodo pellentesque eget at nulla. In mollis libero nisi,
+        \nAliquam accumsan eros nunc, eu ullamcorper metus posuere sed. Curabitur vitae tortor sit amet risus commodo pellentesque eget at nulla. In mollis libero nisi,
+        \nAliquam accumsan eros nunc, eu ullamcorper metus posuere sed. Curabitur vitae tortor sit amet risus commodo pellentesque eget at nulla. In mollis libero nisi,
+        \nAliquam accumsan eros nunc, eu ullamcorper metus posuere sed. Curabitur vitae tortor sit amet risus commodo pellentesque eget at nulla. In mollis libero nisi,
+        \nAliquam accumsan eros nunc, eu ullamcorper metus posuere sed. Curabitur vitae tortor sit amet risus commodo pellentesque eget at nulla. In mollis libero nisi,
+        \nAliquam accumsan eros nunc, eu ullamcorper metus posuere sed. Curabitur vitae tortor sit amet risus commodo pellentesque eget at nulla. In mollis libero nisi,
+        \nAliquam accumsan eros nunc, eu ullamcorper metus posuere sed. Curabitur vitae tortor sit amet risus commodo pellentesque eget at nulla. In mollis libero nisi,
+        \nAliquam accumsan eros nunc, eu ullamcorper metus posuere sed. Curabitur vitae tortor sit amet risus commodo pellentesque eget at nulla. In mollis libero nisi,
+    </string>
 </resources>
