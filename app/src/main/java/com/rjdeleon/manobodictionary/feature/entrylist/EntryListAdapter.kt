@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rjdeleon.manobodictionary.R
 import com.rjdeleon.manobodictionary.base.BaseRecyclerViewAdapter
 import com.rjdeleon.manobodictionary.data.entities.Entry
+import com.rjdeleon.manobodictionary.feature.bookmarked.BookmarkedFragmentDirections
 import com.rjdeleon.manobodictionary.feature.home.HomeFragmentDirections
 import java.lang.Exception
 
@@ -33,8 +34,11 @@ class EntryListAdapter(context: Context) :
         val entry = mEntries[position]
         holder.entryWordText.text = entry.word
         holder.setOnClickListener(View.OnClickListener {
-            val action = HomeFragmentDirections
-                .actionHomeFragmentToEntryFragment(entry.id)
+            val navController = it.findNavController()
+            val action = when(navController.currentDestination!!.id) {
+                R.id.homeFragment -> HomeFragmentDirections.actionHomeFragmentToEntryFragment(entry.id)
+                else -> BookmarkedFragmentDirections.actionBookmarkedFragmentToEntryFragment(entry.id)
+            }
             it.findNavController().navigate(action)
         })
     }
