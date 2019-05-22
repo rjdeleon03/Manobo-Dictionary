@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.rjdeleon.manobodictionary.R
+import com.rjdeleon.manobodictionary.common.observeAllButSeparateFirstUpdate
 
 import com.rjdeleon.manobodictionary.databinding.FragmentEntryBinding
 import kotlinx.android.synthetic.main.fragment_entry.*
@@ -74,15 +75,17 @@ class EntryFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         /* Observe LiveData from viewModel */
-        mViewModel.getEntry().observe(viewLifecycleOwner, Observer {
-            if (it.entry!!.isSaved) {
-                mBookmarkButton.setIcon(R.drawable.ic_bookmark_24dp)
+        mViewModel.getEntry().observeAllButSeparateFirstUpdate(viewLifecycleOwner, Observer {
+            val isBookmarked = it.entry!!.isSaved
+            setBookmarkButtonState(isBookmarked)
+            if (isBookmarked) {
                 Snackbar.make(entryCoordinatorLayout, R.string.entry_bookmark_saved, Snackbar.LENGTH_SHORT).show()
             } else {
-                mBookmarkButton.setIcon(R.drawable.ic_bookmark_border_24dp)
                 Snackbar.make(entryCoordinatorLayout, R.string.entry_bookmark_removed, Snackbar.LENGTH_SHORT).show()
             }
-        })
+        }) {
+            setBookmarkButtonState (it.entry!!.isSaved)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -93,6 +96,14 @@ class EntryFragment : Fragment() {
         mBookmarkButton.setOnMenuItemClickListener {
             mViewModel.bookmarkEntry()
             true
+        }
+    }
+
+    private fun setBookmarkButtonState(isBookmarked: Boolean) {
+        if (isBookmarked) {
+            mBookmarkButton.setIcon(R.drawable.ic_bookmark_24dp)
+        } else {
+            mBookmarkButton.setIcon(R.drawable.ic_bookmark_border_24dp)
         }
     }
 }

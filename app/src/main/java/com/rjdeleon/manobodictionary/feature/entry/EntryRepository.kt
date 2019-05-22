@@ -12,21 +12,18 @@ class EntryRepository (application: Application,
 
     private val mDatabase = DictionaryDatabase.getDatabase(application.applicationContext)
     private val mEntry = mDatabase.entryDao().getByIdWithDetails(entryId)
-    private val mMeaningSets = mDatabase.meaningSetDao().getByEntryId(entryId)
-    private val mNoteSets = mDatabase.noteSetDao().getByEntryId(entryId)
 
     fun getEntry() = mEntry
 
-    fun getMeaningSets() = mMeaningSets
-
-    fun getNoteSets() = mNoteSets
-
-    fun bookmarkEntry() {
+    fun bookmarkEntry(): Boolean {
         val entry = mEntry.value!!.entry!!
-        entry.isSaved = !entry.isSaved
+        val isSaved = !entry.isSaved
+        entry.isSaved = isSaved
 
         CoroutineScope(Job() + Dispatchers.Main).launch (Dispatchers.IO) {
             mDatabase.entryDao().update(entry)
         }
+
+        return isSaved
     }
 }
