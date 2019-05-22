@@ -16,4 +16,6 @@
     <string name="entry_menu_bookmark">Bookmark</string>
     <string name="menu_bookmarked">Bookmarked Entries</string>
     <string name="bookmarked_no_data">No bookmarked entries can be found.</string>
+    <string name="entry_bookmark_saved">This entry has been bookmarked.</string>
+    <string name="entry_bookmark_removed">This entry has been removed from your bookmarks.</string>
 </resources>

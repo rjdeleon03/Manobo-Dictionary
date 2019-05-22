@@ -7,9 +7,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.rjdeleon.manobodictionary.R
 
 import com.rjdeleon.manobodictionary.databinding.FragmentEntryBinding
+import kotlinx.android.synthetic.main.fragment_entry.*
+import kotlinx.android.synthetic.main.fragment_entry.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -40,8 +43,6 @@ class EntryFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         /* Initialize viewModel and meaning set adapter */
-        mViewModel = ViewModelProviders.of(this,
-            EntryViewModelFactory(activity!!.application, args.entryId)).get(EntryViewModel::class.java)
         mMeaningSetAdapter = EntryMeaningSetAdapter(context!!)
         mNoteSetAdapter = EntryNoteSetAdapter(context!!)
     }
@@ -51,28 +52,37 @@ class EntryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding = FragmentEntryBinding.inflate(inflater, container, false)
+        val view = inflater.inflate(R.layout.fragment_entry, container, false)
 
-        /* Set viewModel, lifecycle owner, and adapter */
-        binding.viewModel = mViewModel
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.entryDefinitionRecyclerView.adapter = mMeaningSetAdapter
-        binding.entryNoteRecyclerView.adapter = mNoteSetAdapter
-        mViewModel.getEntry().observe(viewLifecycleOwner, Observer {
-
-            // TODO:
-            // 1. Update button state
-            // 2. Display snackbar
-            if (it.entry!!.isSaved) {
-                mBookmarkButton.setIcon(R.drawable.ic_bookmark_24dp)
-            } else {
-                mBookmarkButton.setIcon(R.drawable.ic_bookmark_border_24dp)
-            }
-        })
+        /* Set adapters */
+        view.entryDefinitionRecyclerView.adapter = mMeaningSetAdapter
+        view.entryNoteRecyclerView.adapter = mNoteSetAdapter
 
         setHasOptionsMenu(true)
 
-        return binding.root
+        return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        mViewModel = ViewModelProviders.of(this,
+            EntryViewModelFactory(activity!!.application, args.entryId)).get(EntryViewModel::class.java)
+
+        /* Set viewModel, lifecycle owner*/
+        val binding = FragmentEntryBinding.bind(view!!)
+        binding.viewModel = mViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        /* Observe LiveData from viewModel */
+        mViewModel.getEntry().observe(viewLifecycleOwner, Observer {
+            if (it.entry!!.isSaved) {
+                mBookmarkButton.setIcon(R.drawable.ic_bookmark_24dp)
+                Snackbar.make(entryCoordinatorLayout, R.string.entry_bookmark_saved, Snackbar.LENGTH_SHORT).show()
+            } else {
+                mBookmarkButton.setIcon(R.drawable.ic_bookmark_border_24dp)
+                Snackbar.make(entryCoordinatorLayout, R.string.entry_bookmark_removed, Snackbar.LENGTH_SHORT).show()
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
