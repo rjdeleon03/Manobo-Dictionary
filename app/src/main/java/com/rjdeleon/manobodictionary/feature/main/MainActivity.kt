@@ -44,7 +44,9 @@ class MainActivity : AppCompatActivity() {
         mSharedSearchViewModel = ViewModelProviders.of(this).get(SharedSearchViewModel::class.java)
 
         val appBarConfig = AppBarConfiguration
-            .Builder(setOf(R.id.homeFragment))
+            .Builder(setOf(
+                R.id.homeFragment,
+                R.id.bookmarkedFragment))
             .setDrawerLayout(mainDrawerLayout)
             .build()
 
@@ -54,22 +56,19 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(mNavController, appBarConfig)
         setupWithNavController(mainNavigationView, mNavController)
         mainNavigationView.menu.getItem(0).isChecked = true
-
-        mainNavigationView.setNavigationItemSelectedListener {
-            if (!it.isChecked) {
-                when (it.itemId) {
-                    R.id.menuHome -> it.isChecked = true
-                    R.id.menuSil -> openUrlInBrowser("https://philippines.sil.org/resources/online_resources/msm")
-                    R.id.menuSos -> openUrlInBrowser("https://saveourschoolsnetwork.wordpress.com/")
-                }
-            }
-            mainDrawerLayout.closeDrawers()
+        mainNavigationView.menu.findItem(R.id.menuSil).setOnMenuItemClickListener {
+            openUrlInBrowser("https://philippines.sil.org/resources/online_resources/msm")
+            true
+        }
+        mainNavigationView.menu.findItem(R.id.menuSos).setOnMenuItemClickListener {
+            openUrlInBrowser("https://saveourschoolsnetwork.wordpress.com/")
             true
         }
 
         mNavController.addOnDestinationChangedListener { _, dest, _ ->
 
             when(dest.id) {
+                R.id.bookmarkedFragment,
                 R.id.homeFragment -> {
                     toolbar?.setNavigationOnClickListener {
                         mainDrawerLayout.openDrawer(GravityCompat.START)

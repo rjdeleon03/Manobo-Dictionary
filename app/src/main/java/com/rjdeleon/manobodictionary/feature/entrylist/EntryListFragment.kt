@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 
 import com.rjdeleon.manobodictionary.databinding.FragmentEntryListBinding
 
-private const val ARG_LETTER = "ARG_LETTER"
+private const val ARG_LETTER_KEY = "ARG_LETTER_KEY"
 
 /**
  * A simple [Fragment] subclass.
@@ -35,7 +35,7 @@ class EntryListFragment : Fragment() {
         @JvmStatic
         fun newInstance(letter: Char) = EntryListFragment().apply {
             arguments = Bundle().apply {
-                putChar(ARG_LETTER, letter)
+                putChar(ARG_LETTER_KEY, letter)
             }
         }
     }
@@ -43,7 +43,7 @@ class EntryListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            mArgLetter = it.getChar(ARG_LETTER)
+            mArgLetter = it.getChar(ARG_LETTER_KEY)
         }
 
         /* Get viewModel */

@@ -10,7 +10,5 @@ class EntryViewModel(application: Application,
 
     fun getEntry() = mRepository.getEntry()
 
-    fun getMeaningSets() = mRepository.getMeaningSets()
-
-    fun getNoteSets() = mRepository.getNoteSets()
+    fun bookmarkEntry() = mRepository.bookmarkEntry()
 }

@@ -15,6 +15,8 @@ interface EntryDao {
     @Query("SELECT (SELECT count(*) FROM entry) + (SELECT count(*) FROM meaning_set) + (SELECT count(*) FROM note_set)")
     fun getLiveCount(): LiveData<Int>
 
+    @Query("SELECT * FROM entry WHERE is_saved = 1")
+    fun getBookmarked(): LiveData<List<Entry>>
 
     @Query("SELECT * FROM entry WHERE normalized_word LIKE :letterFilter COLLATE NOCASE")
     fun getByLetter(letterFilter: String): LiveData<List<Entry>>
@@ -23,9 +25,12 @@ interface EntryDao {
     @Query("SELECT * FROM entry WHERE id = :id")
     fun getByIdWithDetails(id: Int): LiveData<EntryWithDetails>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(entry: Entry)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAllEntries(entries: List<Entry>)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun update(entry: Entry)
 }

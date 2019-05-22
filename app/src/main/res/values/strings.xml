@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Agusan-Manobo Dictionary</string>
+    <string name="app_name">Manobo Dictionary</string>
 
     <string name="entry_notes">Notes</string>
     <string name="entry_definition">Definition</string>
@@ -13,4 +13,9 @@
     <string name="image_background">Background image</string>
     <string name="image_logo">Logo</string>
     <string name="entry_list_no_data">No entries for this letter can be found.</string>
+    <string name="entry_menu_bookmark">Bookmark</string>
+    <string name="menu_bookmarked">Bookmarked Entries</string>
+    <string name="bookmarked_no_data">No bookmarked entries can be found.</string>
+    <string name="entry_bookmark_saved">This entry has been bookmarked.</string>
+    <string name="entry_bookmark_removed">This entry has been removed from your bookmarks.</string>
 </resources>
