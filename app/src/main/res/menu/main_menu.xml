@@ -7,6 +7,9 @@
         <item android:id="@+id/bookmarkedFragment"
             android:title="@string/menu_bookmarked"/>
 
+        <item android:id="@+id/aboutFragment"
+            android:title="@string/menu_about"/>
+
         <item android:id="@+id/menuSil"
             android:title="@string/menu_sil"
             android:checkable="false"/>
