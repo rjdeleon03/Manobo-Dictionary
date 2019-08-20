@@ -33,11 +33,39 @@
             android:background="@android:color/white"
             android:gravity="center">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="@string/about_text" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:fontFamily="@font/catamaran_bold"
+                    android:textSize="16sp"
+                    android:text="Manobo Dictionary" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@mipmap/ic_launcher"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Manobo Dictionary is an app powered by the initiative of [insert Chad or SOS here] to help the Lumad people in [location] learn the Agusan-Manobo language. It serves the primary purpose of helping to revive the seemingly dying language of their forefathers." />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="The app uses data retrieved from SIL Philippines’ website and is jointly developed by Chad Booc, a volunteer teacher for Save Our Schools (SOS) Network, and Ricardo De Leon, a volunteer for Computer Professionals’ Union (CPU)." />
+
+            </LinearLayout>
 
         </ScrollView>
     </LinearLayout>
