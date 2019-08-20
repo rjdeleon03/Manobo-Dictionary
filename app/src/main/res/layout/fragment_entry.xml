@@ -41,13 +41,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:background="#5d1049"
+                        android:background="@color/colorPrimary"
                         android:gravity="center">
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="8dp"
-                            android:background="#00bfa5"/>
+                            android:background="#000"/>
 
                         <TextView
                             android:id="@+id/entryWordText"
@@ -62,7 +62,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="8dp"
-                            android:background="#00bfa5"/>
+                            android:background="#000"/>
 
                     </LinearLayout>
 
