@@ -58,20 +58,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="This Manobo dictionary app serves as a reference to the Manobos in Caraga region to help preserve, strengthen, and empower the use of the language."/>
+                    android:text="@string/text_about_1"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="The use of the Manobo language has been on decline recently due to several factors such as discrimination against the Lumad group, displacement, militarization and land grabbing. With this, we seek to preserve a part of their culture while also fighting for the rights of the Lumad people."/>
+                    android:text="@string/text_about_2"/>
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="The app uses data retrieved from SIL Philippines’ website and is jointly developed by Chad Booc, a volunteer teacher for Save Our Schools (SOS) Network, and Ricardo De Leon, a software engineer and volunteer for Computer Professionals’ Union (CPU)." />
+                    android:text="@string/text_about_3" />
 
             </LinearLayout>
 
