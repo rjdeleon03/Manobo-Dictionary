@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.Transformation
-import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -15,13 +15,13 @@ import com.rjdeleon.manobodictionary.R
 import kotlinx.android.synthetic.main.custom_search_view.view.*
 
 class CustomSearchView(context: Context, attrs: AttributeSet)
-    : LinearLayout(context, attrs) {
+    : RelativeLayout(context, attrs) {
 
     var toolbar: Toolbar?
     var searchFocusChangeListener: (() -> Unit)? = null
     var searchTextChangeListener: ((String) -> Unit)? = null
 
-    private var mCardLayoutParams: LinearLayout.LayoutParams
+    private var mCardLayoutParams: LayoutParams
     private var mCardMargin: Int? = null
     private var mCardRadius: Float? = null
     private var mCardElevation: Float? = null
@@ -37,7 +37,7 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
         attributes.recycle()
 
         /* Retrieve card margins and radius */
-        mCardLayoutParams = cardView.layoutParams as LinearLayout.LayoutParams
+        mCardLayoutParams = cardView.layoutParams as LayoutParams
         mCardMargin = mCardLayoutParams.topMargin
         mCardElevation = cardView.cardElevation
         mCardRadius = cardView.radius
@@ -229,7 +229,7 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
 
     // region Extensions and utilities
 
-    private fun getCardMargin() = (cardView.layoutParams as LinearLayout.LayoutParams).topMargin
+    private fun getCardMargin() = (cardView.layoutParams as LayoutParams).topMargin
 
     private fun getCardRadius() = cardView.radius
 
