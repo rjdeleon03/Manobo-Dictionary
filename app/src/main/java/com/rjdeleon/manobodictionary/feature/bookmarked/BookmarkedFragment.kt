@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
 
 import com.rjdeleon.manobodictionary.R
 import com.rjdeleon.manobodictionary.databinding.FragmentBookmarkedBinding
@@ -36,6 +37,7 @@ class BookmarkedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bookmarkedListRecyclerView.adapter = mAdapter
+        bookmarkedListRecyclerView.addItemDecoration(DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL))
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
