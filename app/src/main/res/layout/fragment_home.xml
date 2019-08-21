@@ -11,25 +11,24 @@
     android:background="@android:color/transparent"
     tools:context=".feature.home.HomeFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/tab_gradient"
-        app:elevation="0dp">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/tab_gradient">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/homeTabLayout"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
             app:tabSelectedTextColor="@android:color/white"
             app:tabTextColor="@color/textColorLightGray"
             app:tabTextAppearance="@style/TabTextAppearance"
             app:tabMode="scrollable"
             app:tabMaxWidth="50dp"
-            app:tabIndicatorHeight="3dp"
-            app:elevation="4dp"/>
+            app:tabIndicatorHeight="4dp"/>
 
-    </com.google.android.material.appbar.AppBarLayout>
+    </RelativeLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/homeViewPager"

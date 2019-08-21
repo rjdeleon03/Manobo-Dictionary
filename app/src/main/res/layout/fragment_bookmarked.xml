@@ -16,21 +16,22 @@
         android:orientation="vertical"
         tools:context=".feature.bookmarked.BookmarkedFragment">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/tab_gradient"
-            app:elevation="4dp">
+            android:background="@drawable/tab_gradient">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="45dp"
+                android:layout_alignParentBottom="true"
                 android:gravity="center"
                 android:text="@string/menu_bookmarked"
                 android:textColor="@android:color/white"
-                android:textAppearance="@style/TabTextAppearance" />
+                android:textAppearance="@style/TabTextAppearance"
+                android:fontFamily="@font/catamaran_semibold"/>
 
-        </com.google.android.material.appbar.AppBarLayout>
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"

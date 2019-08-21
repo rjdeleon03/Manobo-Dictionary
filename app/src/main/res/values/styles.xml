@@ -11,6 +11,7 @@
 
     <style name="TabTextAppearance" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/catamaran_bold</item>
     </style>
 
     <style name="TitleTextViewTheme">
