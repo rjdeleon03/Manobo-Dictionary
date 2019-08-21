@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/bg2"
-        android:scaleType="center"
+        android:scaleType="centerCrop"
         android:contentDescription="@string/image_background" />
 
     <TextView
