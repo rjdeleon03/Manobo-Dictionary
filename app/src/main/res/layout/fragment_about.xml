@@ -58,7 +58,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Manobo Dictionary is an app powered by the initiative of [insert Chad or SOS here] to help the Lumad people in [location] learn the Agusan-Manobo language. It serves the primary purpose of helping to revive the seemingly dying language of their forefathers." />
+                    android:text="This Manobo dictionary app serves as a reference to the Manobos in Caraga region to help preserve, strengthen, and empower the use of the language."/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="The use of the Manobo language has been on decline recently due to several factors such as discrimination against the Lumad group, displacement, militarization and land grabbing. With this, we seek to preserve a part of their culture while also fighting for the rights of the Lumad people."/>
+
 
                 <TextView
                     android:layout_width="match_parent"
