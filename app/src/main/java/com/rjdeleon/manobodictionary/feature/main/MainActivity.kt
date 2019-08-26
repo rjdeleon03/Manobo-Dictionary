@@ -65,19 +65,6 @@ class MainActivity : AppCompatActivity() {
         mNavController.addOnDestinationChangedListener { _, dest, _ ->
 
             when(dest.id) {
-                R.id.aboutFragment,
-                R.id.bookmarkedFragment,
-                R.id.homeFragment -> {
-                    toolbar?.setNavigationOnClickListener {
-                        mainDrawerLayout.openDrawer(GravityCompat.START)
-                    }
-
-                    mainSearchView?.switchToDefaultState()
-                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-                    currentFocus?.clearFocus()
-                    animateBgPattern()
-                }
                 R.id.entryFragment -> {
                     mainSearchView?.switchToEmptyState()
                     toolbar?.setNavigationOnClickListener {
@@ -90,6 +77,17 @@ class MainActivity : AppCompatActivity() {
                     toolbar?.setNavigationOnClickListener {
                         onBackPressed()
                     }
+                    animateBgPattern()
+                }
+                else -> {
+                    toolbar?.setNavigationOnClickListener {
+                        mainDrawerLayout.openDrawer(GravityCompat.START)
+                    }
+
+                    mainSearchView?.switchToDefaultState()
+                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+                    currentFocus?.clearFocus()
                     animateBgPattern()
                 }
             }

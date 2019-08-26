@@ -26,4 +26,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_about_3">The app uses data retrieved from SIL Philippines’ website and is jointly developed by Chad Booc, a volunteer teacher for Alternative Learning Center for Agricultural and Livelihood Development (ALCADEV), a part of the Save Our Schools (SOS) Network, and Ricardo De Leon, a software engineer and volunteer for Computer Professionals’ Union (CPU).</string>
+    <string name="text_sos_1">Save Our Schools Network is a network of child-focused NGOs, church-based groups, and other stakeholders advocating for children\'s right to education.</string>
+    <string name="text_sos_2">Lumad schools are built by the community themselves with the aim of educating the indigenous youth about their human rights and how to defend themselves and their ancestral lands.
+        This is the exact reason why these schools are constantly being attacked by the Armed Forces of the Philippines. They do not want the Lumad to get educated since this would hinder the corporate interests to grab their ancestral lands.</string>
+    <string name="text_sos_3">With this, SOS Network stands with the Lumad in their fight for the right to education and for their ancestral lands. The network calls to end the military attacks against Lumad schools and communities.</string>
+    <string name="text_sos_4">#SaveLumadSchools\n#EndMilitarization\n#StopTheAttacks</string>
 </resources>
