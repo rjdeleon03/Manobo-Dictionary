@@ -57,10 +57,10 @@ class MainActivity : AppCompatActivity() {
             openUrlInBrowser("https://philippines.sil.org/resources/online_resources/msm")
             true
         }
-        mainNavigationView.menu.findItem(R.id.menuSos).setOnMenuItemClickListener {
-            openUrlInBrowser("https://saveourschoolsnetwork.wordpress.com/")
-            true
-        }
+//        mainNavigationView.menu.findItem(R.id.menuSos).setOnMenuItemClickListener {
+//            openUrlInBrowser("https://saveourschoolsnetwork.wordpress.com/")
+//            true
+//        }
 
         mNavController.addOnDestinationChangedListener { _, dest, _ ->
 

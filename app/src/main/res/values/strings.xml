@@ -10,8 +10,7 @@
     <string name="menu_sil">SIL Philippines</string>
     <string name="menu_sos">Save Our Schools Network</string>
     <string name="splash_setup">Setting up the dictionary…</string>
-    <string name="splash_progress"
-        tools:ignore="PluralsCandidate">Added %1$d / %2$d entries.</string>
+    <string name="splash_progress" tools:ignore="PluralsCandidate">Added %1$d / %2$d entries.</string>
     <string name="image_background">Background image</string>
     <string name="image_logo">Logo</string>
     <string name="entry_list_no_data">No entries for this letter can be found.</string>
@@ -23,5 +22,8 @@
     </string>
     <string name="text_about_1">This Manobo dictionary app serves as a reference to the Manobos in Caraga region to help preserve, strengthen, and empower the use of the language.</string>
     <string name="text_about_2">The use of the Manobo language has been on decline recently due to several factors such as discrimination against the Lumad group, displacement, militarization and land grabbing. With this, we seek to preserve a part of their culture while also fighting for the rights of the Lumad people.</string>
-    <string name="text_about_3">The app uses data retrieved from SIL Philippines’ website and is jointly developed by Chad Booc, a volunteer teacher for Save Our Schools (SOS) Network, and Ricardo De Leon, a software engineer and volunteer for Computer Professionals’ Union (CPU).</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_about_3">The app uses data retrieved from SIL Philippines’ website and is jointly developed by Chad Booc, a volunteer teacher for Alternative Learning Center for Agricultural and Livelihood Development (ALCADEV), a part of the Save Our Schools (SOS) Network, and Ricardo De Leon, a software engineer and volunteer for Computer Professionals’ Union (CPU).</string>
 </resources>

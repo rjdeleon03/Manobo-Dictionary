@@ -79,4 +79,9 @@
         android:name="com.rjdeleon.manobodictionary.feature.about.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/sosFragment"
+        android:name="com.rjdeleon.manobodictionary.feature.sos.SosFragment"
+        android:label="fragment_sos"
+        tools:layout="@layout/fragment_sos" />
 </navigation>

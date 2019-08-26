@@ -1,4 +1,5 @@
-package com.rjdeleon.manobodictionary.feature.about
+package com.rjdeleon.manobodictionary.feature.sos
+
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,16 +9,18 @@ import android.view.ViewGroup
 
 import com.rjdeleon.manobodictionary.R
 
-class AboutFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = AboutFragment()
-    }
+/**
+ * A simple [Fragment] subclass.
+ */
+class SosFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_about, container, false)
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_sos, container, false)
     }
+
+
 }

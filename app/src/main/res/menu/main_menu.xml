@@ -10,12 +10,11 @@
         <item android:id="@+id/aboutFragment"
             android:title="@string/menu_about"/>
 
+        <item android:id="@+id/sosFragment"
+            android:title="@string/menu_sos"/>
+
         <item android:id="@+id/menuSil"
             android:title="@string/menu_sil"
-            android:checkable="false"/>
-
-        <item android:id="@+id/menuSos"
-            android:title="@string/menu_sos"
             android:checkable="false"/>
     </group>
 </menu>
