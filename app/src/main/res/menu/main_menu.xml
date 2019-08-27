@@ -13,8 +13,7 @@
         <item android:id="@+id/sosFragment"
             android:title="@string/menu_sos"/>
 
-        <item android:id="@+id/menuSil"
-            android:title="@string/menu_sil"
-            android:checkable="false"/>
+        <item android:id="@+id/linksFragment"
+            android:title="@string/menu_links"/>
     </group>
 </menu>

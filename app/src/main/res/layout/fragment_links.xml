@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".feature.links.LinksFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/tab_gradient">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:text="@string/menu_links"
+                android:textColor="@android:color/white"
+                android:textAppearance="@style/TabTextAppearance"
+                android:fontFamily="@font/catamaran_semibold" />
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/linkSil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="36dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="?attr/actionBarSize"
+                            android:layout_height="?attr/actionBarSize"
+                            android:src="@drawable/logo_sil"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/link_sil"/>
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <!--
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ddd"/>
+                -->
+
+                <FrameLayout
+                    android:id="@+id/linkAlcadev"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="36dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="?attr/actionBarSize"
+                            android:layout_height="?attr/actionBarSize"
+                            android:src="@drawable/logo_alcadev"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/link_alcadev"/>
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <!--
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ddd"/>
+                -->
+
+                <FrameLayout
+                    android:id="@+id/linkSos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="36dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="?attr/actionBarSize"
+                            android:layout_height="?attr/actionBarSize"
+                            android:src="@drawable/logo_sos"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/link_sos"/>
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <!--
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ddd"/>
+                -->
+
+                <FrameLayout
+                    android:id="@+id/linkCpu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="36dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="?attr/actionBarSize"
+                            android:layout_height="?attr/actionBarSize"
+                            android:src="@drawable/logo_cpu"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:text="@string/link_cpu"/>
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <!--
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ddd"/>
+                -->
+
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+</FrameLayout>

@@ -43,7 +43,9 @@ class MainActivity : AppCompatActivity() {
             .Builder(setOf(
                 R.id.homeFragment,
                 R.id.bookmarkedFragment,
-                R.id.aboutFragment))
+                R.id.aboutFragment,
+                R.id.sosFragment,
+                R.id.linksFragment))
             .setDrawerLayout(mainDrawerLayout)
             .build()
 
@@ -53,14 +55,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(mNavController, appBarConfig)
         setupWithNavController(mainNavigationView, mNavController)
         mainNavigationView.menu.getItem(0).isChecked = true
-        mainNavigationView.menu.findItem(R.id.menuSil).setOnMenuItemClickListener {
-            openUrlInBrowser("https://philippines.sil.org/resources/online_resources/msm")
-            true
-        }
-//        mainNavigationView.menu.findItem(R.id.menuSos).setOnMenuItemClickListener {
-//            openUrlInBrowser("https://saveourschoolsnetwork.wordpress.com/")
-//            true
-//        }
 
         mNavController.addOnDestinationChangedListener { _, dest, _ ->
 
@@ -102,12 +96,6 @@ class MainActivity : AppCompatActivity() {
         mainSearchView.searchTextChangeListener = {query ->
             mSharedSearchViewModel.performSearch(query)
         }
-    }
-
-    private fun openUrlInBrowser(url: String) {
-        val i = Intent(Intent.ACTION_VIEW)
-        i.data = Uri.parse(url)
-        startActivity(i)
     }
 
     private fun animateBgPattern(shouldMoveDownward: Boolean = false) {

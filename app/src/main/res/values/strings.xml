@@ -31,4 +31,9 @@
         This is the exact reason why these schools are constantly being attacked by the Armed Forces of the Philippines. They do not want the Lumad to get educated since this would hinder the corporate interests to grab their ancestral lands.</string>
     <string name="text_sos_3">With this, SOS Network stands with the Lumad in their fight for the right to education and for their ancestral lands. The network calls to end the military attacks against Lumad schools and communities.</string>
     <string name="text_sos_4">#SaveLumadSchools\n#EndMilitarization\n#StopTheAttacks</string>
+    <string name="menu_links">External Links</string>
+    <string name="link_sil">The Summer Institute of Linguistics, Philippines (SIL Philippines)</string>
+    <string name="link_alcadev">Alternative Learning Center for Agricultural and Livelihood Development (ALCADEV)</string>
+    <string name="link_sos">Save Our Schools Network (SOS)</string>
+    <string name="link_cpu">Computer Professionals\' Union (CPU)</string>
 </resources>
