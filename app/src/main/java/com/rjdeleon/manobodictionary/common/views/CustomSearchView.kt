@@ -221,7 +221,7 @@ class CustomSearchView(context: Context, attrs: AttributeSet)
                 animationFinishedAction.invoke()
             }
         })
-        a.duration = 200
+        a.duration = 500
         viewToAnimate.startAnimation(a)
     }
 
