@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.rjdeleon.manobodictionary.R
+import com.rjdeleon.manobodictionary.common.openUrlInBrowser
+import kotlinx.android.synthetic.main.fragment_about.*
 
 class AboutFragment : Fragment() {
 
@@ -19,5 +21,12 @@ class AboutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_about, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        frontMatterImage.setOnClickListener {
+            openUrlInBrowser("https://philippines.sil.org/sites/phil/files/msm_front_matter.pdf") }
     }
 }

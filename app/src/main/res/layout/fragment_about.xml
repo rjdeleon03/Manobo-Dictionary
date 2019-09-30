@@ -29,14 +29,14 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:gravity="center">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:padding="16dp"
                 android:orientation="vertical">
 
                 <!--
@@ -49,15 +49,9 @@
                     android:text="Manobo Dictionary" />
                     -->
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:src="@drawable/icon_raw"/>
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:text="@string/text_about_1"/>
 
                 <TextView
@@ -66,12 +60,26 @@
                     android:layout_marginTop="16dp"
                     android:text="@string/text_about_2"/>
 
+                <ImageView
+                    android:id="@+id/frontMatterImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="224dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/front_matter"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/text_about_3" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/splash_permission_compact"
+                    android:textStyle="italic"
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
