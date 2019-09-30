@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.rjdeleon.manobodictionary.R
+import com.rjdeleon.manobodictionary.common.openUrlInBrowser
 import kotlinx.android.synthetic.main.fragment_links.*
 
 /**
@@ -35,11 +36,5 @@ class LinksFragment : Fragment() {
             openUrlInBrowser("https://saveourschoolsnetwork.wordpress.com/") }
         linkCpu.setOnClickListener {
             openUrlInBrowser("https://www.facebook.com/CPUnion/") }
-    }
-
-    private fun openUrlInBrowser(url: String) {
-        val i = Intent(Intent.ACTION_VIEW)
-        i.data = Uri.parse(url)
-        startActivity(i)
     }
 }

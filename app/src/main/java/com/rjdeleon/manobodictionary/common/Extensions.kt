@@ -1,5 +1,8 @@
 package com.rjdeleon.manobodictionary.common
 
+import android.content.Intent
+import android.net.Uri
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -25,4 +28,10 @@ fun <T> LiveData<T>.observeAllButSeparateFirstUpdate(
         }
         observer.onChanged(it)
     })
+}
+
+fun Fragment.openUrlInBrowser(url: String) {
+    val i = Intent(Intent.ACTION_VIEW)
+    i.data = Uri.parse(url)
+    startActivity(i)
 }
