@@ -20,7 +20,7 @@ interface EntryDao {
     fun getBookmarked(): Flow<List<Entry>>
 
     @Query("SELECT * FROM entry WHERE normalized_word LIKE :letterFilter COLLATE NOCASE")
-    fun getByLetter(letterFilter: String): LiveData<List<Entry>>
+    fun getByLetter(letterFilter: String): Flow<List<Entry>>
 
     @Transaction
     @Query("SELECT * FROM entry WHERE id = :id")

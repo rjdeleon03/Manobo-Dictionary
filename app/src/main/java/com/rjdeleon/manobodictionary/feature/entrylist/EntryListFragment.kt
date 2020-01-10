@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.rjdeleon.manobodictionary.R
 
-import com.rjdeleon.manobodictionary.databinding.FragmentEntryListBinding
+import kotlinx.android.synthetic.main.fragment_entry_list.*
 
 private const val ARG_LETTER_KEY = "ARG_LETTER_KEY"
 
@@ -46,10 +48,6 @@ class EntryListFragment : Fragment() {
             mArgLetter = it.getChar(ARG_LETTER_KEY)
         }
 
-        /* Get viewModel */
-        mViewModel = ViewModelProvider(this, EntryListViewModelFactory(activity!!.application, mArgLetter))
-            .get(EntryListViewModel::class.java)
-
         /* Get adapter for entry list */
         mAdapter = EntryListAdapter(context!!)
     }
@@ -58,16 +56,24 @@ class EntryListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val binding = FragmentEntryListBinding.inflate(inflater, container, false)
+        return inflater.inflate(R.layout.fragment_entry_list, container, false)
+    }
 
-        /* Set the viewModel, lifecycle owner, and adapter */
-        binding.viewModel = mViewModel
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.entryListRecyclerView.adapter = mAdapter
-        binding.entryListRecyclerView
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        entryListRecyclerView.adapter = mAdapter
+        entryListRecyclerView
             .addItemDecoration(DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL))
+    }
 
-        return binding.root
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        /* Get viewModel */
+        mViewModel = ViewModelProvider(this, EntryListViewModelFactory(activity!!.application, mArgLetter))
+            .get(EntryListViewModel::class.java)
+        mViewModel.entries.observe(viewLifecycleOwner, Observer { list ->
+            mAdapter.setEntries(list)
+        })
     }
 }
