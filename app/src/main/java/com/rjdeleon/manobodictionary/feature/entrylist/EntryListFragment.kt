@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 
 import com.rjdeleon.manobodictionary.databinding.FragmentEntryListBinding
@@ -47,8 +47,7 @@ class EntryListFragment : Fragment() {
         }
 
         /* Get viewModel */
-        mViewModel = ViewModelProviders
-            .of(this, EntryListViewModelFactory(activity!!.application, mArgLetter))
+        mViewModel = ViewModelProvider(this, EntryListViewModelFactory(activity!!.application, mArgLetter))
             .get(EntryListViewModel::class.java)
 
         /* Get adapter for entry list */

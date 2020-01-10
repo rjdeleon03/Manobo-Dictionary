@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 
 import com.rjdeleon.manobodictionary.databinding.FragmentSearchBinding
@@ -27,7 +27,7 @@ class SearchFragment : Fragment() {
 
         /* Initialize viewModel and adapter */
         mViewModel = activity?.run {
-            ViewModelProviders.of(this).get(SharedSearchViewModel::class.java)
+            ViewModelProvider(this).get(SharedSearchViewModel::class.java)
         } ?: throw Exception("Invalid activity")
         mAdapter = SearchResultAdapter(context!!)
     }

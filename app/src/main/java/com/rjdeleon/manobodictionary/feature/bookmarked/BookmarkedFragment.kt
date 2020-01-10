@@ -1,11 +1,11 @@
 package com.rjdeleon.manobodictionary.feature.bookmarked
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 
 import com.rjdeleon.manobodictionary.R
@@ -42,7 +42,7 @@ class BookmarkedFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mViewModel = ViewModelProviders.of(this).get(BookmarkedViewModel::class.java)
+        mViewModel = ViewModelProvider(this).get(BookmarkedViewModel::class.java)
 
         val binding = FragmentBookmarkedBinding.bind(view!!)
         binding.viewModel = mViewModel

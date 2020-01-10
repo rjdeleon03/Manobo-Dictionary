@@ -12,7 +12,7 @@ import android.view.animation.Transformation
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         mNavController = findNavController(R.id.navigationFragment)
 
         /* Initialize shared search viewModel */
-        mSharedSearchViewModel = ViewModelProviders.of(this).get(SharedSearchViewModel::class.java)
+        mSharedSearchViewModel = ViewModelProvider(this).get(SharedSearchViewModel::class.java)
 
         val appBarConfig = AppBarConfiguration
             .Builder(setOf(
