@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 
@@ -44,9 +45,9 @@ class BookmarkedFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         mViewModel = ViewModelProvider(this).get(BookmarkedViewModel::class.java)
 
-        val binding = FragmentBookmarkedBinding.bind(view!!)
-        binding.viewModel = mViewModel
-        binding.lifecycleOwner = viewLifecycleOwner
+        mViewModel.bookmarkedEntries.observe(viewLifecycleOwner, Observer { list ->
+            mAdapter.setEntries(list)
+        })
     }
 
 }

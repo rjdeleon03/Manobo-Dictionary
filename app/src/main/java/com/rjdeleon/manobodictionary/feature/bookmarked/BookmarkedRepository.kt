@@ -1,9 +1,9 @@
 package com.rjdeleon.manobodictionary.feature.bookmarked
 
 import android.app.Application
-import androidx.lifecycle.LiveData
 import com.rjdeleon.manobodictionary.data.DictionaryDatabase
 import com.rjdeleon.manobodictionary.data.entities.Entry
+import kotlinx.coroutines.flow.Flow
 
 class BookmarkedRepository(application: Application) {
 
@@ -11,6 +11,6 @@ class BookmarkedRepository(application: Application) {
 
     private val mBookmarkedEntries = mDatabase.entryDao().getBookmarked()
 
-    val bookmarkedEntries: LiveData<List<Entry>>
+    val bookmarkedEntries: Flow<List<Entry>>
         get() = mBookmarkedEntries
 }
