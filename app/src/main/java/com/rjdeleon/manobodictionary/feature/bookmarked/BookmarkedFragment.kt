@@ -11,8 +11,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 
 import com.rjdeleon.manobodictionary.R
 import com.rjdeleon.manobodictionary.databinding.FragmentBookmarkedBinding
+import com.rjdeleon.manobodictionary.di.components.DaggerViewModelStoreOwnerComponent
+import com.rjdeleon.manobodictionary.di.modules.ViewModelModule
 import com.rjdeleon.manobodictionary.feature.entrylist.EntryListAdapter
 import kotlinx.android.synthetic.main.fragment_bookmarked.*
+import javax.inject.Inject
 
 class BookmarkedFragment : Fragment() {
 
@@ -20,7 +23,9 @@ class BookmarkedFragment : Fragment() {
         fun newInstance() = BookmarkedFragment()
     }
 
-    private lateinit var mViewModel: BookmarkedViewModel
+    @Inject
+    lateinit var mViewModel: BookmarkedViewModel
+
     private lateinit var mAdapter: EntryListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +48,12 @@ class BookmarkedFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mViewModel = ViewModelProvider(this).get(BookmarkedViewModel::class.java)
+
+        DaggerViewModelStoreOwnerComponent
+            .builder()
+            .viewModelModule(ViewModelModule(this))
+            .build()
+            .inject(this)
 
         mViewModel.bookmarkedEntries.observe(viewLifecycleOwner, Observer { list ->
             mAdapter.setEntries(list)

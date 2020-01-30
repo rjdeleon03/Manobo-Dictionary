@@ -7,7 +7,7 @@ import com.rjdeleon.manobodictionary.data.entities.Entry
 import kotlinx.coroutines.flow.Flow
 
 class EntryListRepository(application: Application,
-                          letter: Char): AndroidViewModel(application) {
+                          letter: Char) {
 
     private val mDatabase = DictionaryDatabase.getDatabase(application.applicationContext)
     private val mEntries = mDatabase.entryDao().getByLetter("$letter%")
